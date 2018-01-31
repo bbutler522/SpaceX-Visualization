@@ -14,7 +14,7 @@
   max-height: 100px;
 }
 .launch .card-block {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
 }
 .launch .launch-failure {
   color: #900;
@@ -22,9 +22,12 @@
 .launch .launch-success {
   color: #050;
 }
-@media (min-width: 767px) {
+.launch .accordion .card {
+  margin: auto -20px;
+}
+@media (min-width: 992px) {
   .launch {
-    width: 25%;
+    width: 29%;
   }
 }
 

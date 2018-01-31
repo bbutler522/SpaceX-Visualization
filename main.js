@@ -35,21 +35,71 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
     var reuse = val.reuse;
     $.each(reuse, function(key, value) {
       if (value === true) {
-        html += '<p class="text-info"><strong>Reused ' + key + '</strong></p>';
+        html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
       }
     });
+    if (val.telemetry.flight_club !== null) {
+      html +=
+        '<p><a href="' +
+        val.telemetry.flight_club +
+        '" target="_blank">Telemetry</a></p>';
+    }
+
+    /* Accordion for Details and Payload */
+    html +=
+      '<div class="accordion" id="accordion' +
+      num +
+      '" role="tablist" aria-multiselectable="true">';
     if (val.details !== null) {
       html +=
-        '<p><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#details' +
+        '<div class="card border-left-0 border-right-0  border-left-0 border-bottom-0"><div class="card-header" role="tab" id="headingOne' +
         num +
-        '" aria-expanded="false" aria-controls="details' +
+        '"><h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion' +
         num +
-        '">Details</button></p><div class="collapse" id="details' +
+        '" href="#collapseOne' +
         num +
-        '"><div class="card card-block">' +
+        '" aria-expanded="true" aria-controls="collapseOne' +
+        num +
+        '">Details</a></h5></div><div id="collapseOne' +
+        num +
+        '" class="collapse " role="tabpanel" aria-labelledby="headingOne' +
+        num +
+        '"><div class="card-block">' +
         val.details +
-        "</div></div>";
+        "</div>";
     }
+
+    html +=
+      '</div></div><div class="card  border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
+      num +
+      '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' +
+      num +
+      '" href="#collapseThree' +
+      num +
+      '" aria-expanded="false" aria-controls="collapseThree' +
+      num +
+      '">Payload</a></h5></div><div id="collapseThree' +
+      num +
+      '" class="collapse" role="tabpanel" aria-labelledby="headingThree' +
+      num +
+      '"><div class="card-block">';
+    // For each payload do
+      var payload = val.rocket.second_stage.payloads
+    for (i=0; i<payload.length; i++){
+      html += '<p><strong>ID:</strong> ' + payload[i].payload_id + '</p>';
+      html += '<p><strong>Type:</strong> ' + payload[i].payload_type + '</p>';
+
+      html += '<p><strong>Customers:</strong> ';
+      // Get the customers
+      for (j=0; j<payload[i].customers.length; j++){
+        html += '<br/>' + payload[i].customers[j];
+      }
+      html += '<hr/>';
+    }
+    
+    html += "</div></div></div>";
+    html += "</div>";
+    
     html += "</div>";
     html += "</div><br>";
   });
@@ -96,15 +146,15 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
       hAxis: { format: "", showTextEvery: 1 },
       height: 400,
       colors: ["#1b9e77", "#d95f02", "#7570b3"],
-      legend: { position: "none" },
+      legend: { position: "none" }
     };
 
     var chart = new google.charts.Bar(document.getElementById("chart_div"));
 
     chart.draw(data, google.charts.Bar.convertOptions(options));
   }
-  
-  $(window).resize(function(){
+
+  $(window).resize(function() {
     drawChart();
   });
   //
