@@ -1,10 +1,9 @@
 // https://api.spacexdata.com/v2/launches
 // https://api.spacexdata.com/v2/launches/upcoming
 
-$.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
+// Function to generate launches from JSON input
+function launchGen(json) {
   var html = "";
-
-  // Create the html for each flight
   json.forEach(function(val) {
     var num = val.flight_number;
     var patchSrc = val.links.mission_patch;
@@ -84,29 +83,39 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
       num +
       '"><div class="card-block">';
     // For each payload do
-      var payload = val.rocket.second_stage.payloads
-    for (i=0; i<payload.length; i++){
-      html += '<p><strong>ID:</strong> ' + payload[i].payload_id + '</p>';
-      html += '<p><strong>Type:</strong> ' + payload[i].payload_type + '</p>';
+    var payload = val.rocket.second_stage.payloads;
+    for (i = 0; i < payload.length; i++) {
+      html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
+      html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
 
-      html += '<p><strong>Customers:</strong> ';
+      html += "<p><strong>Customers:</strong> ";
       // Get the customers
-      for (j=0; j<payload[i].customers.length; j++){
-        html += '<br/>' + payload[i].customers[j];
+      for (j = 0; j < payload[i].customers.length; j++) {
+        html += "<br/>" + payload[i].customers[j];
       }
-      html += '<hr/>';
+      html += "<hr/>";
     }
-    
+
     html += "</div></div></div>";
     html += "</div>";
-    
+
     html += "</div>";
     html += "</div><br>";
   });
+  return html;
+}
+
+// Previous Launches
+$.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
+  var html = "";
+
+  // Create the html for each flight
+  html = launchGen(json);
+
   // Add the html to the page
   $("#main").append(html);
 
-  /* Create an array of the years since the first launch 
+  /* Create an array of the years since the first launch
   **  to track how many launches there were each year */
   var years = [];
   var dteNow = new Date().getFullYear();
