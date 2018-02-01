@@ -14,7 +14,6 @@ function launchGen(json) {
     html += "<div class = 'launch card'>";
     html += "<div class='card-header'>";
     html += "<p><strong>Flight #:</strong> " + val.flight_number + "</p>";
-    html += "<img class='launch-patch img-fluid' src='" + patchSrc + "' />";
     if (patchSrc !== null) {
       html += "<img class='launch-patch img-fluid' src='" + patchSrc + "' />";
     }
