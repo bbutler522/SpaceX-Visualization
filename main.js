@@ -32,7 +32,7 @@ function launchGen(json) {
     if (val.launch_success === true) {
       html +=
         "<p class='launch-success'><strong>Launch Successful</strong></p>";
-    } else {
+    } else if (val.launch_success !== null) {
       html += "<p class='launch-failure'><strong>Launch Failure</strong></p>";
     }
     if (val.rocket.first_stage.cores[0].land_success === true) {
@@ -107,7 +107,7 @@ function launchGen(json) {
     html += "</div>";
 
     html += "</div>";
-    html += "</div><br>";
+    html += "</div>";
   });
   return html;
 }
@@ -177,3 +177,18 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
   // End launches by year chart
   //
 });
+
+// Upcoming Launches
+
+$.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
+  var html = "";
+
+  // Create the html for each flight
+  html = launchGen(json);
+
+  // Add the html to the page
+  $("#upcoming").append(html);
+});
+
+$("#sortLaunchFirst").on("click", sortLaunchNumFirst);
+$("#sortLaunchLast").on("click", sortLaunchNumLast);

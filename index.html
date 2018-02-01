@@ -22,18 +22,28 @@
     <div class="row">
       <div class="col-sm-12">
         <h1>Visualizing SpaceX's past and future launches.</h1>
+        <a href="#upcoming">Upcoming Launches</a>
         <div class="alert alert-info" role="alert">
           <strong>Work in Progress</strong>
         </div>
        <div id="chart_div"></div>
         <h2>All launch Data</h2>
         <div id="main" class="row"></div>
+        <h2>Previous Launches </h2>
+        <button id="sortLaunchFirst" class="btn btn-info">Show latest first</button>
+        <a href="#upcoming">Upcoming Launches</a>
+        <button id="sortLaunchLast" class="btn btn-info" style="display: none;">Show earliest first</button>
+
+        <div id="main" class="row list"></div>
+
+        <h2>Upcoming Launches</h2>
+        <a href="#main">Previous Launches</a>
+        <div id="upcoming" class="row"></div>
 
         <p>API's used:<br/><a href="https://api.spacexdata.com/v2/launches" target="_blank">https://api.spacexdata.com/v2/launches</a><br/><a href="https://api.spacexdata.com/v2/launches/upcoming" target="_blank">https://api.spacexdata.com/v2/launches/upcoming</a></p>
       </div>
     </div>
   </div>
-
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
