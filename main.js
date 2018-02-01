@@ -12,6 +12,8 @@ function launchGen(json) {
       patchSrc = patchSrc.replace("i.imgur.com/", "kageurufu.net/imgur/?");
     }
     html += "<div class = 'launch card'>";
+    var launchDate = new Date(val.launch_date_unix * 1000);
+
     html += "<div class='card-header'>";
     html += "<p><strong>Flight #:</strong> " + val.flight_number + "</p>";
     if (patchSrc !== null) {
@@ -19,7 +21,10 @@ function launchGen(json) {
     }
     html += "</div>";
     html += "<div class='card-block'>";
-    html += "<p><strong>Launch Year:</strong> " + val.launch_year + "</p>";
+    html +=
+      "<p class='date'><strong>Launch Date:</strong> " +
+      launchDate.toLocaleDateString() +
+      "</p>";
     html +=
       "<p><strong>Rocket Name:</strong> " + val.rocket.rocket_name + "</p>";
     html +=
