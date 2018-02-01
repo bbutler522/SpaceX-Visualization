@@ -8,13 +8,16 @@ function launchGen(json) {
     var num = val.flight_number;
     var patchSrc = val.links.mission_patch;
     // Use a mirror for Imgur since they block some GET requests from codepen
-    if (patchSrc.indexOf("imgur") > -1) {
+    if (patchSrc !== null && patchSrc.indexOf("imgur") > -1) {
       patchSrc = patchSrc.replace("i.imgur.com/", "kageurufu.net/imgur/?");
     }
     html += "<div class = 'launch card'>";
     html += "<div class='card-header'>";
     html += "<p><strong>Flight #:</strong> " + val.flight_number + "</p>";
     html += "<img class='launch-patch img-fluid' src='" + patchSrc + "' />";
+    if (patchSrc !== null) {
+      html += "<img class='launch-patch img-fluid' src='" + patchSrc + "' />";
+    }
     html += "</div>";
     html += "<div class='card-block'>";
     html += "<p><strong>Launch Year:</strong> " + val.launch_year + "</p>";
