@@ -11,9 +11,9 @@ function launchGen(json) {
     if (patchSrc !== null && patchSrc.indexOf("imgur") > -1) {
       patchSrc = patchSrc.replace("i.imgur.com/", "kageurufu.net/imgur/?");
     }
-    html += "<div class = 'launch card'>";
     var launchDate = new Date(val.launch_date_unix * 1000);
 
+    html += "<div data-launch='" + num + "' class='launch card'>";
     html += "<div class='card-header'>";
     html += "<p><strong>Flight #:</strong> " + val.flight_number + "</p>";
     if (patchSrc !== null) {
@@ -192,3 +192,23 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 
 $("#sortLaunchFirst").on("click", sortLaunchNumFirst);
 $("#sortLaunchLast").on("click", sortLaunchNumLast);
+
+function sortLaunchNumFirst() {
+  var divList = $("#main .launch");
+  divList.sort(function(a, b) {
+    return $(b).data("launch") - $(a).data("launch");
+  });
+  $("#main").html(divList);
+  $("#sortLaunchFirst").hide();
+  $("#sortLaunchLast").show();
+}
+
+function sortLaunchNumLast() {
+  var divList = $("#main .launch");
+  divList.sort(function(a, b) {
+    return $(a).data("launch") - $(b).data("launch");
+  });
+  $("#main").html(divList);
+  $("#sortLaunchLast").hide();
+  $("#sortLaunchFirst").show();
+}
