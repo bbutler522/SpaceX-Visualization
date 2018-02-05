@@ -295,6 +295,9 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
     chart.draw(data, google.charts.Bar.convertOptions(options));
   }
 
+
+  removeLoad("chartLoad");
+
   $(window).resize(function() {
     drawChart();
   });
