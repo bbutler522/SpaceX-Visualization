@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="style.css" />
 
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css'>
 </head>
 <body>
@@ -31,28 +32,39 @@
         <a href="#main" class="btn btn-secondary">Previous Launches</a>
         <a href="#upcoming" class="btn btn-secondary">Upcoming Launches</a>
         <br/><br/>
-
+        <hr/>
         <!-- Next Launch -->
-        <h2>Next launch <span id="launchCountdown"></span></h2>
-        <div id="nextLaunch" class="row hide-details"></div>
 
+        <div id="nextLaunch" class="row hide-details"><h2 class="col-md-12">Next launch <span id="launchCountdown"></span></h2><i id="nextLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i></div>
+
+        <hr/>
         <!-- Chart of Launches by Year -->
+        <h2>SpaceX in Charts</h2>
         <div id="chart_div"></div>
+        <i id="chartLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
+
+
+        <hr/>
         <h2>Previous Launches </h2>
         <button id="sortLaunchFirst" class="btn btn-info">Show latest first</button>
         <button id="sortLaunchLast" class="btn btn-info" style="display: none;">Show earliest first</button>
         <a href="#upcoming" class="btn btn-secondary">Upcoming Launches</a>
 
         <div id="main" class="row list"></div>
+        <i id="previousLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
 
+        <hr/>
         <h2>Upcoming Launches</h2>
         <a href="#main" class="btn btn-secondary">Previous Launches</a>
         <div id="upcoming" class="row"></div>
+        <i id="upcomingLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
 
+        <hr/>
         <p>API's used:<br/><a href="https://api.spacexdata.com/v2/launches" target="_blank">https://api.spacexdata.com/v2/launches</a><br/><a href="https://api.spacexdata.com/v2/launches/upcoming" target="_blank">https://api.spacexdata.com/v2/launches/upcoming</a></p>
       </div>
     </div>
   </div>
+  <a href="#" class="scrollToTop"><i class="fas fa-rocket" data-fa-transform="rotate--45 down-4"></i></a>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

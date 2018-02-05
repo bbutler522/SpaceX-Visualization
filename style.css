@@ -73,3 +73,30 @@
   opacity: 0;
   transition: all .5s;
 }
+
+.scrollToTop {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px;
+  text-align: center;
+  background: whiteSmoke;
+  font-weight: bold;
+  color: #444;
+  text-decoration: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display: none;
+  background: #ddd;
+}
+.scrollToTop svg {
+  transition: all .3s;
+}
+.scrollToTop:hover {
+  text-decoration: none;
+}
+.scrollToTop:hover svg {
+  margin-bottom: 2px;
+  transition: all .3s;
+}

@@ -359,3 +359,39 @@ $("#nextLaunch").on("click", ".toggle-header", function(){
   $( "#nextLaunch" ).toggleClass( "show-details" );
 });
 // End show additional next launch info
+
+// Make reused parts readable
+// Remove underscore and make title case
+function toTitleCase(str) {
+  str = str.replace("_", " ");
+    return str.replace(/(?:^|\s)\w/g, function(match) {
+        return match.toUpperCase();
+    });
+}
+// End reused parts readable
+
+// Remove loading icon
+function removeLoad(loadId){
+  loadId = "#" + loadId;
+  $(loadId).remove();
+}
+
+// Scroll to top
+$(document).ready(function(){
+
+	//Check to see if the window is top if not then display button
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 100) {
+			$('.scrollToTop').fadeIn();
+		} else {
+			$('.scrollToTop').fadeOut();
+		}
+	});
+
+	//Click event to scroll to top
+	$('.scrollToTop').click(function(){
+		$('html, body').animate({scrollTop : 0},800);
+		return false;
+	});
+});
+// end scroll to top
