@@ -35,3 +35,41 @@
   width: 100%;
   min-height: 450px;
 }
+
+#nextLaunch .launch {
+  width: 100%;
+}
+#nextLaunch.hide-details .card-block {
+  display: none;
+}
+#nextLaunch.hide-details .card .card {
+  display: none;
+}
+#nextLaunch.hide-details .toggle-header {
+  cursor: pointer;
+}
+#nextLaunch.hide-details .toggle-header::after {
+  content: 'Display additional info';
+  font-size: .8em;
+  margin-left: 20px;
+  color: #444;
+}
+#nextLaunch.show-details .toggle-header {
+  cursor: pointer;
+}
+#nextLaunch.show-details .toggle-header::after {
+  content: 'Hide additional info';
+  font-size: .8em;
+  margin-left: 20px;
+  color: #444;
+}
+
+#launchCountdown {
+  font-size: .7em;
+  font-weight: normal;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all .5s;
+}
