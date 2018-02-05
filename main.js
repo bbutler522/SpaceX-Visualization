@@ -40,7 +40,7 @@ function launchCountdown(launchTime){
 function nextLaunchGen(json) {
   var html = "";
   var val = json[0];
-  var num = val.flight_number;
+  var num = 'Next';
   var launchDate = new Date(val.launch_date_unix * 1000);
   html += "<div data-launch='" + num + "' class='launch card'>";
   html += "<div class='card-header toggle-header'>";
@@ -244,6 +244,7 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
 
   // Add the html to the page
   $("#main").append(html);
+  removeLoad("previousLoad");
 
   /* Create an array of the years since the first launch
   **  to track how many launches there were each year */
@@ -310,6 +311,7 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 
   // Add the html to the page
   $("#upcoming").append(html);
+  removeLoad("upcomingLoad");
 });
 // End Upcoming Launches
 
@@ -322,6 +324,7 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 
   // Add the html to the page
   $("#nextLaunch").append(html);
+  removeLoad("nextLoad");
 
   // Add countdown until launch
   launchCountdown(json[0].launch_date_unix);
