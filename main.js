@@ -58,6 +58,7 @@ function nextLaunchGen(json) {
   var reuse = val.reuse;
   $.each(reuse, function(key, value) {
     if (value === true) {
+      key = toTitleCase(key)
       html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
     }
   });
@@ -164,6 +165,7 @@ function launchGen(json) {
     var reuse = val.reuse;
     $.each(reuse, function(key, value) {
       if (value === true) {
+        key = toTitleCase(key)
         html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
       }
     });
