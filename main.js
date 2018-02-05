@@ -324,7 +324,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 // Next Launch
 $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
   var html = "";
-
   // Create the html for each flight
   html = nextLaunchGen(json);
 
@@ -334,6 +333,11 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 
   // Add countdown until launch
   launchCountdown(json[0].launch_date_unix);
+
+  // Hide section if there are no listed upcoming launches
+  if (json[0] == undefined) {
+    $('#nextLaunch').hide();
+  }
 });
 // End Next Launch
 
