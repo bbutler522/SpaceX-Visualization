@@ -233,6 +233,7 @@ function launchGen(json) {
   });
   return html;
 }
+// End Launch Gen Function
 
 // Previous Launches
 $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
@@ -301,7 +302,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
 });
 
 // Upcoming Launches
-
 $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
   var html = "";
 
