@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
 
@@ -9,56 +8,73 @@
   <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
   <title>CodePen - SpaceX Launch Data Visualization</title>
   <!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Mada:400,500,600,700,900" rel="stylesheet">
 
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css'>
 </head>
+
 <body>
+  <header id="header" role="banner">
+    <div class="header-inner container">
+      <div id="navigation">
+        <nav class="main-nav">
+          <!--<a href="/" title="Home" rel="home" id="logo"><img src="http://www.spacex.com/sites/all/themes/spacex2012/logo.png" alt="Home"></a>-->
+          <h1>SpaceX Tracking</h1>
+          <div class="region region-navigation">
+            <ul class="menu nav-list nav-primary">
+              <li class="first"><a href="#main" class="menu__link">Previous Launches</a></li>
+              <li><a href="#upcoming">Upcoming Launches</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <!-- /#navigation -->
+
+    </div>
+    <nav class="subnav">
+      <div class="container">
+      </div>
+    </nav>
+  </header>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1>SpaceX Tracking</h1>
         <p class="tagline">
-          Visualizing SpaceX's past and future launches. <strong class="text-info">Work in Progress.</strong>
-        </p>
-        <a href="#main" class="btn btn-secondary">Previous Launches</a>
-        <a href="#upcoming" class="btn btn-secondary">Upcoming Launches</a>
-        <br/><br/>
-        <hr/>
-        <!-- Next Launch -->
+          <!-- Next Launch -->
 
-        <div id="nextLaunch" class="row hide-details"><h2 class="col-md-12">Next launch <span id="launchCountdown"></span></h2><i id="nextLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i></div>
+          <div id="nextLaunch" class="row hide-details">
+            <h2 class="col-md-12">Next launch <span id="launchCountdown"></span></h2><i id="nextLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i></div>
 
-        <hr/>
-        <!-- Chart of Launches by Year -->
-        <h2>SpaceX in Charts</h2>
-        <div id="chart_div"></div>
-        <i id="chartLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
+          <hr/>
+          <!-- Chart of Launches by Year -->
+          <h2>SpaceX in Charts</h2>
+          <div id="chart_div"></div>
+          <i id="chartLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
 
+          <hr/>
+          <h2>Previous Launches </h2>
+          <button id="sortLaunchFirst" class="btn btn-info">Show latest first</button>
+          <button id="sortLaunchLast" class="btn btn-info" style="display: none;">Show earliest first</button>
+          <a href="#upcoming" class="btn btn-secondary">Upcoming Launches</a>
 
-        <hr/>
-        <h2>Previous Launches </h2>
-        <button id="sortLaunchFirst" class="btn btn-info">Show latest first</button>
-        <button id="sortLaunchLast" class="btn btn-info" style="display: none;">Show earliest first</button>
-        <a href="#upcoming" class="btn btn-secondary">Upcoming Launches</a>
+          <div id="main" class="row list"></div>
+          <i id="previousLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
 
-        <div id="main" class="row list"></div>
-        <i id="previousLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
+          <hr/>
+          <h2>Upcoming Launches</h2>
+          <a href="#main" class="btn btn-secondary">Previous Launches</a>
+          <div id="upcoming" class="row"></div>
+          <i id="upcomingLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
 
-        <hr/>
-        <h2>Upcoming Launches</h2>
-        <a href="#main" class="btn btn-secondary">Previous Launches</a>
-        <div id="upcoming" class="row"></div>
-        <i id="upcomingLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
-
-        <hr/>
-        <p>API's used:<br/><a href="https://api.spacexdata.com/v2/launches" target="_blank">https://api.spacexdata.com/v2/launches</a><br/><a href="https://api.spacexdata.com/v2/launches/upcoming" target="_blank">https://api.spacexdata.com/v2/launches/upcoming</a></p>
-        <p>GitHub:<br/><a href="https://github.com/bbutler522/SpaceX-Visualization" target="_blank">https://github.com/bbutler522/SpaceX-Visualization</a></p>
+          <hr/>
+          <p>API's used:<br/><a href="https://api.spacexdata.com/v2/launches" target="_blank">https://api.spacexdata.com/v2/launches</a><br/><a href="https://api.spacexdata.com/v2/launches/upcoming" target="_blank">https://api.spacexdata.com/v2/launches/upcoming</a></p>
+          <p>GitHub:<br/><a href="https://github.com/bbutler522/SpaceX-Visualization" target="_blank">https://github.com/bbutler522/SpaceX-Visualization</a></p>
       </div>
     </div>
   </div>

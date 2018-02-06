@@ -10,6 +10,7 @@
 - Make Reusable Parts Readable
 - removeLoad
 - Scroll to Top
+- Smooth anchor scrolling
 */
 
 // Function to generate launches from JSON input
@@ -416,6 +417,31 @@ $(document).ready(function() {
   });
 });
 // end scroll to top
+
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("#navigation").on('click', 'a', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
 
 // Thanks to https://github.com/r-spacex/SpaceX-API for creating the following APIs
 // https://api.spacexdata.com/v2/launches

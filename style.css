@@ -1,3 +1,74 @@
+body {
+  font-family: "Mada", sans-serif;
+}
+
+#header {
+  position: relative;
+  z-index: 5;
+  height: 75px;
+  background: #181c1f;
+}
+#header .header-inner {
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+}
+#header h1 {
+  color: #fff;
+  display: block;
+  float: left;
+  font-size: 26px;
+}
+#header #navigation {
+  top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#header #navigation .main-nav {
+  position: relative;
+  padding-top: 20px;
+  height: 100%;
+  letter-spacing: 0.05em;
+}
+#header #navigation .main-nav #logo {
+  float: left;
+  margin: 0;
+  padding: 0;
+  margin-top: -8px;
+}
+#header #navigation .main-nav ul {
+  margin: 0;
+  margin-left: 20px;
+  padding: 0;
+  text-align: left;
+  padding-top: 7px;
+}
+#header #navigation .main-nav ul li {
+  float: left;
+  margin-right: 0;
+  padding: 0;
+  list-style-type: none;
+  list-style-image: none;
+  margin-left: 18px;
+}
+#header #navigation .main-nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+#header #navigation .main-nav ul li a:hover {
+  transition: border 0.2s ease;
+  border-bottom-color: #ccac55;
+}
+@media (min-width: 480px) {
+  #header #navigation {
+    position: absolute;
+    top: 0;
+    height: 3em;
+    width: 100%;
+  }
+}
+
 .launch {
   margin: 20px;
   background-color: #eee;
@@ -49,8 +120,8 @@
   cursor: pointer;
 }
 #nextLaunch.hide-details .toggle-header::after {
-  content: 'Display additional info';
-  font-size: .8em;
+  content: "Display additional info";
+  font-size: 0.8em;
   margin-left: 20px;
   color: #444;
 }
@@ -58,20 +129,20 @@
   cursor: pointer;
 }
 #nextLaunch.show-details .toggle-header::after {
-  content: 'Hide additional info';
-  font-size: .8em;
+  content: "Hide additional info";
+  font-size: 0.8em;
   margin-left: 20px;
   color: #444;
 }
 
 #launchCountdown {
-  font-size: .7em;
+  font-size: 0.7em;
   font-weight: normal;
   border: 1px solid #ccc;
   background: #eee;
   border-radius: 4px;
   opacity: 0;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .scrollToTop {
@@ -91,12 +162,12 @@
   background: #ddd;
 }
 .scrollToTop svg {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .scrollToTop:hover {
   text-decoration: none;
 }
 .scrollToTop:hover svg {
   margin-bottom: 2px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
