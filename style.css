@@ -14,6 +14,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   position: relative;
+  background: #181c1f;
 }
 
 #header h1 {
@@ -27,6 +28,13 @@ body {
   top: 0px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+#header #navigation .icon {
+  display: none;
+  color: #fff;
+  text-decoration: none;
+  padding: 20px;
 }
 
 #header #navigation .main-nav {
@@ -92,6 +100,28 @@ body {
     top: 0;
     height: 3em;
     width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  #header #navigation li {
+    display: none;
+  }
+  #header #navigation a.icon {
+    float: right;
+    display: block;
+  }
+  #header #navigation.responsive h1 {
+    float: none;
+  }
+  #header #navigation.responsive li {
+    display: block;
+    float: none !important;
+  }
+  #header #navigation.responsive .region-navigation {
+    position: absolute;
+    width: 100%;
+    background-color: #181c1f;
   }
 }
 

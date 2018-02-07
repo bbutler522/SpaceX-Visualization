@@ -15,6 +15,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     position: relative;
+    background: #181c1f;
   }
 
   h1 {
@@ -28,6 +29,13 @@ body {
     top: 0px;
     padding-left: 10px;
     padding-right: 10px;
+
+    .icon {
+       display: none;
+       color: #fff;
+       text-decoration: none;
+       padding: 20px;
+    }
 
     .main-nav {
       position: relative;
@@ -91,6 +99,28 @@ body {
       top: 0;
       height: 3em;
       width: 100%;
+    }
+
+    @media (max-width: 991px) {
+      li {display: none ;}
+      a.icon {
+        float: right;
+        display: block ;
+      }
+      &.responsive {
+        h1 {
+          float: none;
+        }
+        li {
+          display: block;
+          float: none !important;
+        }
+        .region-navigation {
+          position: absolute;
+          width: 100%;
+          background-color: #181c1f;
+        }
+      }
     }
   }
 }

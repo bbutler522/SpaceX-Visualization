@@ -556,6 +556,15 @@ $(document).ready(function(){
   });
 });
 
+function myFunction() {
+    var x = document.getElementById("navigation");
+    if (x.className === "") {
+        x.className += "responsive";
+    } else {
+        x.className = "";
+    }
+}
+
 // Thanks to https://github.com/r-spacex/SpaceX-API for creating the following APIs
 /*
 https://api.spacexdata.com/v2/launches
