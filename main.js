@@ -219,7 +219,7 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
 
   // Create the html for each flight
   html = launchGen(json);
-
+  sortLaunchNumFirst();
   // Add the html to the page
   $("#main").append(html);
   removeLoad("previousLoad");
