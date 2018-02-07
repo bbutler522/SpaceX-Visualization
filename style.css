@@ -8,34 +8,40 @@ body {
   height: 75px;
   background: #181c1f;
 }
+
 #header .header-inner {
   margin-right: auto;
   margin-left: auto;
   position: relative;
 }
+
 #header h1 {
   color: #fff;
   display: block;
   float: left;
   font-size: 26px;
 }
+
 #header #navigation {
   top: 0px;
   padding-left: 10px;
   padding-right: 10px;
 }
+
 #header #navigation .main-nav {
   position: relative;
   padding-top: 20px;
   height: 100%;
   letter-spacing: 0.05em;
 }
+
 #header #navigation .main-nav #logo {
   float: left;
   margin: 0;
   padding: 0;
   margin-top: -8px;
 }
+
 #header #navigation .main-nav ul {
   margin: 0;
   margin-left: 20px;
@@ -43,6 +49,7 @@ body {
   text-align: left;
   padding-top: 7px;
 }
+
 #header #navigation .main-nav ul li {
   float: left;
   margin-right: 0;
@@ -51,26 +58,32 @@ body {
   list-style-image: none;
   margin-left: 18px;
 }
+
 #header #navigation .main-nav ul li a {
   color: #fff;
   text-decoration: none;
   border-bottom: 2px solid transparent;
 }
+
 #header #navigation .main-nav ul li a:hover {
   transition: border 0.2s ease;
   border-bottom-color: #ccac55;
 }
+
 #header #navigation .main-nav .nav-secondary {
   font-weight: 500;
   font-size: 12px;
   padding-top: 4px;
 }
+
 #header #navigation .main-nav .nav-secondary a {
   color: #8b939b;
 }
+
 #header #navigation .main-nav .nav-secondary a:hover {
   border-bottom-color: #8b939b;
 }
+
 @media (min-width: 480px) {
   #header #navigation {
     position: absolute;
@@ -87,26 +100,33 @@ body {
   border-radius: 5px;
   width: 100%;
 }
+
 .launch .card-header p {
   margin-bottom: 0;
   float: left;
 }
+
 .launch .card-header .launch-patch {
   float: right;
   max-height: 100px;
 }
+
 .launch .card-block {
   padding: 20px 20px 0 20px;
 }
+
 .launch .launch-failure {
   color: #900;
 }
+
 .launch .launch-success {
   color: #050;
 }
+
 .launch .accordion .card {
   margin: auto -20px;
 }
+
 @media (min-width: 992px) {
   .launch {
     width: 29%;
@@ -121,24 +141,30 @@ body {
 #nextLaunch .launch {
   width: 100%;
 }
+
 #nextLaunch.hide-details .card-block {
   display: none;
 }
+
 #nextLaunch.hide-details .card .card {
   display: none;
 }
+
 #nextLaunch.hide-details .toggle-header {
   cursor: pointer;
 }
+
 #nextLaunch.hide-details .toggle-header::after {
   content: "Display additional info";
   font-size: 0.8em;
   margin-left: 20px;
   color: #444;
 }
+
 #nextLaunch.show-details .toggle-header {
   cursor: pointer;
 }
+
 #nextLaunch.show-details .toggle-header::after {
   content: "Hide additional info";
   font-size: 0.8em;
@@ -172,12 +198,15 @@ body {
   display: none;
   background: #ddd;
 }
+
 .scrollToTop svg {
   transition: all 0.3s;
 }
+
 .scrollToTop:hover {
   text-decoration: none;
 }
+
 .scrollToTop:hover svg {
   margin-bottom: 2px;
   transition: all 0.3s;
