@@ -219,11 +219,11 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
 
   // Create the html for each flight
   html = launchGen(json);
-  sortLaunchNumFirst();
+
   // Add the html to the page
   $("#main").append(html);
   removeLoad("previousLoad");
-
+  sortLaunchNumFirst();
   /* Create an array of the years since the first launch
   **  to track how many launches there were each year */
   var years = [];
@@ -307,7 +307,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 
   // Add countdown until launch
   launchCountdown(json[0].launch_date_unix);
-
   // Hide section if there are no listed upcoming launches
   if (json[0] == undefined) {
     $("#nextLaunch").hide();
@@ -318,7 +317,7 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 // Countdown til launch
 // Set the date we're counting down to
 function launchCountdown(launchTime) {
-  var countDownDate = new Date(1517941800 * 1000);
+  var countDownDate = new Date(launchTime * 1000);
 
   // Update the count down every 1 second
   var x = setInterval(function() {
@@ -343,7 +342,7 @@ function launchCountdown(launchTime) {
     // If the count down is over, write some text
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById("launchCountdown").innerHTML = "";
+      document.getElementById("launchCountdown").innerHTML = "Estimated Launch Time Reached";
     }
     $("#launchCountdown").css("opacity", "1");
   }, 1000);
