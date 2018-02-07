@@ -1,0 +1,214 @@
+body {
+  font-family: "Mada", sans-serif;
+}
+
+#header {
+  position: relative;
+  z-index: 5;
+  height: 75px;
+  background: #181c1f;
+
+  .header-inner {
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+  }
+
+  h1 {
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 26px;
+  }
+
+  #navigation {
+    top: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .main-nav {
+      position: relative;
+      padding-top: 20px;
+      height: 100%;
+      letter-spacing: 0.05em;
+
+      #logo {
+        float: left;
+        margin: 0;
+        padding: 0;
+        margin-top: -8px;
+      }
+
+      ul {
+        margin: 0;
+        margin-left: 20px;
+        padding: 0;
+        text-align: left;
+        padding-top: 7px;
+
+        li {
+          float: left;
+          margin-right: 0;
+          padding: 0;
+          list-style-type: none;
+          list-style-image: none;
+          margin-left: 18px;
+
+          a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+
+            &:hover {
+              transition: border 0.2s ease;
+              border-bottom-color: #ccac55;
+            }
+          }
+        }
+      }
+
+      .nav-secondary {
+        font-weight: 500;
+        font-size: 12px;
+        padding-top: 4px;
+
+        a {
+          color: #8b939b;
+
+          &:hover {
+            border-bottom-color: #8b939b;
+          }
+        }
+      }
+    }
+
+    @media (min-width: 480px) {
+      position: absolute;
+      top: 0;
+      height: 3em;
+      width: 100%;
+    }
+  }
+}
+
+.launch {
+  margin: 20px;
+  background-color: #eee;
+  box-shadow: 0px 0px 2px #ccc;
+  border-radius: 5px;
+  width: 100%;
+
+  .card-header {
+    p {
+      margin-bottom: 0;
+      float: left;
+    }
+
+    .launch-patch {
+      float: right;
+      max-height: 100px;
+    }
+  }
+
+  .card-block {
+    padding: 20px 20px 0 20px;
+  }
+
+  .launch-failure {
+    color: #900;
+  }
+
+  .launch-success {
+    color: #050;
+  }
+
+  .accordion {
+    .card {
+      margin: auto -20px;
+    }
+  }
+
+  .card {
+  }
+
+  @media (min-width: 992px) {
+    width: 29%;
+  }
+}
+
+.chart {
+  width: 100%;
+  min-height: 450px;
+}
+
+#nextLaunch {
+  .launch {
+    width: 100%;
+  }
+  &.hide-details {
+    .card-block {
+      display: none;
+    }
+    .card .card {
+      display: none;
+    }
+    .toggle-header {
+      cursor: pointer;
+      &::after {
+        content: "Display additional info";
+        font-size: 0.8em;
+        margin-left: 20px;
+        color: #444;
+      }
+    }
+  }
+  &.show-details {
+    .toggle-header {
+      cursor: pointer;
+      &::after {
+        content: "Hide additional info";
+        font-size: 0.8em;
+        margin-left: 20px;
+        color: #444;
+      }
+    }
+  }
+}
+
+#launchCountdown {
+  font-size: 0.7em;
+  font-weight: normal;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.scrollToTop {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px;
+  text-align: center;
+  background: whiteSmoke;
+  font-weight: bold;
+  color: #444;
+  text-decoration: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display: none;
+  background: #ddd;
+  svg {
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    text-decoration: none;
+    svg {
+      margin-bottom: 2px;
+      transition: all 0.3s;
+    }
+  }
+}
