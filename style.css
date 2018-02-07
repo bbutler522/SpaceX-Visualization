@@ -60,6 +60,17 @@ body {
   transition: border 0.2s ease;
   border-bottom-color: #ccac55;
 }
+#header #navigation .main-nav .nav-secondary {
+  font-weight: 500;
+  font-size: 12px;
+  padding-top: 4px;
+}
+#header #navigation .main-nav .nav-secondary a {
+  color: #8b939b;
+}
+#header #navigation .main-nav .nav-secondary a:hover {
+  border-bottom-color: #8b939b;
+}
 @media (min-width: 480px) {
   #header #navigation {
     position: absolute;
