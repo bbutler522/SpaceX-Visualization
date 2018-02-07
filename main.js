@@ -443,7 +443,15 @@ $(document).ready(function(){
 });
 
 // Thanks to https://github.com/r-spacex/SpaceX-API for creating the following APIs
-// https://api.spacexdata.com/v2/launches
-// https://api.spacexdata.com/v2/launches/upcoming
+/*
+https://api.spacexdata.com/v2/launches
+https://api.spacexdata.com/v2/launches/upcoming
 
+Company: https://api.spacexdata.com/v2/info
+Rockets: https://api.spacexdata.com/v2/rockets
+Capsules: https://api.spacexdata.com/v2/capsules
+Launchpads: https://api.spacexdata.com/v2/launchpads
+Capsule Detail: https://api.spacexdata.com/v2/parts/caps
+Core Detail: https://api.spacexdata.com/v2/parts/cores
+*/
 // Project by BrennanButler.com
