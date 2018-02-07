@@ -3,10 +3,11 @@ body {
 }
 
 #header {
-  position: relative;
+  position: fixed;
   z-index: 5;
   height: 75px;
   background: #181c1f;
+  width: 100%;
 }
 
 #header .header-inner {
@@ -92,6 +93,10 @@ body {
     height: 3em;
     width: 100%;
   }
+}
+
+#nextLaunch {
+  margin-top: 100px;
 }
 
 .launch {
