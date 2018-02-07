@@ -213,6 +213,28 @@ function nextLaunchGen(json) {
   return html;
 }
 
+// Generate company info
+function companyGen(json) {
+  var html = "";
+  html += '<p><strong>Company: </strong>'+json.name+'</p>';
+  html += '<p><strong>Founder: </strong>'+json.founder+'</p>';
+  html += '<p><strong>Founded: </strong>'+json.founded+'</p>';
+  html += '<p><strong>Employees: </strong>'+json.employees+'</p>';
+  html += '<p><strong>Vehicles: </strong>'+json.vehicles+'</p>';
+  html += '<p><strong>Launch Sites: </strong>'+json.launch_sites+'</p>';
+  html += '<p><strong>Test Sites: </strong>'+json.test_sites+'</p>';
+  html += '<p><strong>CEO: </strong>'+json.ceo+'</p>';
+  html += '<p><strong>CTO: </strong>'+json.cto+'</p>';
+  html += '<p><strong>COO: </strong>'+json.coo+'</p>';
+  html += '<p><strong>CTO Propulsion: </strong>'+json.cto_propulsion+'</p>';
+  html += '<p><strong>Valuation: </strong>'+json.valuation+'</p>';
+  html += '<p><strong>Headquarters: </strong>'+json.headquarters.address+', '+json.headquarters.city+', '+json.headquarters.state+'</p>';
+  html += '<p><strong>Summary: </strong>'+json.summary+'</p>';
+
+  return html;
+}
+// End Launch Gen Function
+
 // Previous Launches
 $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
   var html = "";
@@ -313,6 +335,19 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
   }
 });
 // End Next Launch
+
+// Upcoming Launches
+$.getJSON("https://api.spacexdata.com/v2/info", function(json) {
+  var html = "";
+
+  // Create the html for each flight
+  html = companyGen(json);
+
+  // Add the html to the page
+  $("#company").append(html);
+  removeLoad("companyLoad");
+});
+// End Upcoming Launches
 
 // Countdown til launch
 // Set the date we're counting down to
@@ -417,8 +452,8 @@ $(document).ready(function() {
 });
 // end scroll to top
 
+// Add smooth scrolling to all links
 $(document).ready(function(){
-  // Add smooth scrolling to all links
   $("#navigation").on('click', 'a', function(event) {
 
     // Make sure this.hash has a value before overriding default behavior
