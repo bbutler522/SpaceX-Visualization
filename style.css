@@ -48,6 +48,7 @@ body {
   padding: 0;
   text-align: left;
   padding-top: 7px;
+  text-transform: uppercase;
 }
 
 #header #navigation .main-nav ul li {

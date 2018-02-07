@@ -227,7 +227,7 @@ function companyGen(json) {
   html += '<p><strong>CTO: </strong>'+json.cto+'</p>';
   html += '<p><strong>COO: </strong>'+json.coo+'</p>';
   html += '<p><strong>CTO Propulsion: </strong>'+json.cto_propulsion+'</p>';
-  html += '<p><strong>Valuation: </strong>'+json.valuation+'</p>';
+  html += '<p><strong>Valuation: </strong>$'+json.valuation.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'</p>';
   html += '<p><strong>Headquarters: </strong>'+json.headquarters.address+', '+json.headquarters.city+', '+json.headquarters.state+'</p>';
   html += '<p><strong>Summary: </strong>'+json.summary+'</p>';
 
