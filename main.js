@@ -209,7 +209,7 @@ function nextLaunchGen(json) {
   html += "</div>";
   html += "</div>";
   html +=
-    '<p class="col-12">Stream of launch usually available at <a href="http://www.spacex.com/webcast" target="_blank">http://www.spacex.com/webcast</a></p>';
+    '<p class="col-12">Countdown is based on the initial launch time, which is subject to change.</p><p class="col-12">Stream of launch usually available at <a href="http://www.spacex.com/webcast" target="_blank">http://www.spacex.com/webcast</a></p>';
   return html;
 }
 
