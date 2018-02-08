@@ -26,15 +26,18 @@ body {
   }
 
   #navigation {
-    top: 0px;
+    top: 0;
     padding-left: 10px;
     padding-right: 10px;
 
-    .icon {
-       display: none;
-       color: #fff;
-       text-decoration: none;
-       padding: 20px;
+    #menuTab {
+      display: none;
+      color: #fff;
+      text-decoration: none;
+      padding: 20px;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
 
     .main-nav {
@@ -51,8 +54,7 @@ body {
       }
 
       ul {
-        margin: 0;
-        margin-left: 20px;
+        margin: 0 0 0 20px;
         padding: 0;
         text-align: left;
         padding-top: 7px;
@@ -93,32 +95,52 @@ body {
         }
       }
     }
-
     @media (min-width: 480px) {
       position: absolute;
       top: 0;
       height: 3em;
       width: 100%;
     }
-
     @media (max-width: 991px) {
-      li {display: none ;}
-      a.icon {
-        float: right;
-        display: block ;
+      .region-navigation {
+        transition: all 0.2s;
+        opacity: 0;
       }
+
+      #menuTab {
+        float: right;
+        display: block;
+        transition: all 2s;
+
+        &:active {
+          transform: rotate(180deg);
+        }
+      }
+
+      h1 {
+        float: none;
+      }
+
+      li {
+        display: block;
+        float: none !important;
+        margin-bottom: 14px;
+
+        &.first {
+          margin-top: 20px;
+        }
+      }
+
+      .region-navigation {
+        position: absolute;
+        width: 100%;
+        background-color: #181c1f;
+        opacity: 0;
+      }
+
       &.responsive {
-        h1 {
-          float: none;
-        }
-        li {
-          display: block;
-          float: none !important;
-        }
         .region-navigation {
-          position: absolute;
-          width: 100%;
-          background-color: #181c1f;
+          opacity: 1;
         }
       }
     }
@@ -132,7 +154,7 @@ body {
 .launch {
   margin: 20px;
   background-color: #eee;
-  box-shadow: 0px 0px 2px #ccc;
+  box-shadow: 0 0 2px #ccc;
   border-radius: 5px;
   width: 100%;
 
@@ -149,7 +171,7 @@ body {
   }
 
   .card-block {
-    padding: 20px 20px 0 20px;
+    padding: 20px 20px 0;
   }
 
   .launch-failure {
@@ -166,9 +188,7 @@ body {
     }
   }
 
-  .card {
-  }
-
+  .card {}
   @media (min-width: 992px) {
     width: 29%;
   }
@@ -183,15 +203,19 @@ body {
   .launch {
     width: 100%;
   }
+
   &.hide-details {
     .card-block {
       display: none;
     }
+
     .card .card {
       display: none;
     }
+
     .toggle-header {
       cursor: pointer;
+
       &::after {
         content: "Display additional info";
         font-size: 0.8em;
@@ -200,9 +224,11 @@ body {
       }
     }
   }
+
   &.show-details {
     .toggle-header {
       cursor: pointer;
+
       &::after {
         content: "Hide additional info";
         font-size: 0.8em;
@@ -238,12 +264,14 @@ body {
   right: 40px;
   display: none;
   background: #ddd;
+
   svg {
     transition: all 0.3s;
   }
 
   &:hover {
     text-decoration: none;
+
     svg {
       margin-bottom: 2px;
       transition: all 0.3s;

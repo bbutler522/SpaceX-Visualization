@@ -556,14 +556,13 @@ $(document).ready(function(){
   });
 });
 
-function myFunction() {
-    var x = document.getElementById("navigation");
-    if (x.className === "") {
-        x.className += "responsive";
-    } else {
-        x.className = "";
-    }
-}
+
+// Mobile nav menu functionality
+$('#menuTab').on('click', function() {
+  $('#navigation').toggleClass('responsive');
+  $(this).children().toggleClass('fa-bars');
+  $(this).children().toggleClass('fa-times');
+});
 
 // Thanks to https://github.com/r-spacex/SpaceX-API for creating the following APIs
 /*

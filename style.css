@@ -25,16 +25,19 @@ body {
 }
 
 #header #navigation {
-  top: 0px;
+  top: 0;
   padding-left: 10px;
   padding-right: 10px;
 }
 
-#header #navigation .icon {
+#header #navigation #menuTab {
   display: none;
   color: #fff;
   text-decoration: none;
   padding: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 #header #navigation .main-nav {
@@ -52,8 +55,7 @@ body {
 }
 
 #header #navigation .main-nav ul {
-  margin: 0;
-  margin-left: 20px;
+  margin: 0 0 0 20px;
   padding: 0;
   text-align: left;
   padding-top: 7px;
@@ -104,24 +106,37 @@ body {
 }
 
 @media (max-width: 991px) {
-  #header #navigation li {
-    display: none;
+  #header #navigation .region-navigation {
+    transition: all 0.2s;
+    opacity: 0;
   }
-  #header #navigation a.icon {
+  #header #navigation #menuTab {
     float: right;
     display: block;
+    transition: all 2s;
   }
-  #header #navigation.responsive h1 {
+  #header #navigation #menuTab:active {
+    transform: rotate(180deg);
+  }
+  #header #navigation h1 {
     float: none;
   }
-  #header #navigation.responsive li {
+  #header #navigation li {
     display: block;
     float: none !important;
+    margin-bottom: 14px;
   }
-  #header #navigation.responsive .region-navigation {
+  #header #navigation li.first {
+    margin-top: 20px;
+  }
+  #header #navigation .region-navigation {
     position: absolute;
     width: 100%;
     background-color: #181c1f;
+    opacity: 0;
+  }
+  #header #navigation.responsive .region-navigation {
+    opacity: 1;
   }
 }
 
@@ -132,7 +147,7 @@ body {
 .launch {
   margin: 20px;
   background-color: #eee;
-  box-shadow: 0px 0px 2px #ccc;
+  box-shadow: 0 0 2px #ccc;
   border-radius: 5px;
   width: 100%;
 }
@@ -148,7 +163,7 @@ body {
 }
 
 .launch .card-block {
-  padding: 20px 20px 0 20px;
+  padding: 20px 20px 0;
 }
 
 .launch .launch-failure {
