@@ -24,6 +24,10 @@ body {
   font-size: 26px;
 }
 
+#header a:hover {
+  text-decoration: none;
+}
+
 #header #navigation {
   top: 0;
   padding-left: 10px;
