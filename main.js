@@ -1,17 +1,18 @@
 /* Organization
-- launchGen
-- nextLaunchGen
-- Previous Launches
-- Upcoming Launches
-- Next Launch
-- launchCountdown
+- HTML generators from JSON
+- JSON functions
 - Sorting
 - Show/Hide Next Launch Detail
-- Make Reusable Parts Readable
+- Make JSON output readable
 - removeLoad
 - Scroll to Top
 - Smooth anchor scrolling
 */
+
+
+/********************
+     Generators
+********************/
 
 // Function to generate launches from JSON input
 function launchGen(json) {
@@ -81,7 +82,7 @@ function launchGen(json) {
         num +
         '">Details</a></h5></div><div id="collapseOne' +
         num +
-        '" class="collapse " role="tabpanel" aria-labelledby="headingOne' +
+        '" class="collapse" role="tabpanel" aria-labelledby="headingOne' +
         num +
         '"><div class="card-block">' +
         val.details +
@@ -89,7 +90,7 @@ function launchGen(json) {
     }
 
     html +=
-      '</div></div><div class="card  border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
+      '</div></div><div class="card border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
       num +
       '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' +
       num +
@@ -288,6 +289,88 @@ function detailCoresGen(json) {
 }
 // End company info gen
 
+// Function to generate rockets
+function capsulesGen(json) {
+  var html = "";
+  json.forEach(function(val) {
+    html += "<div class='launch card'>";
+    html += "<div class='card-header'>";
+    html += "<p><strong>"+val.name+"</strong></p>";
+    html += "</div>";
+    html += "<div class='card-block'>";
+    html += "<p><strong>Stages: </strong>" + val.stages + "</p>"
+    if (val.crew_capacity > 0) {
+      html += "<p><strong>Crew Capacity: </strong>" + val.crew_capacity + "</p>"
+    }
+    //html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>"
+    html += "<p><strong>First Flight: </strong>" + val.first_flight + "</p>"
+    //  Add remaining info
+    html += "</div></div>";
+
+    html += "</div>";
+    html += "</div>";
+  });
+  return html;
+}
+// End Rocket Gen Function
+
+// Generate Detail Cores
+function detailCapsulesGen(json) {
+  var html = "";
+  json.forEach(function(val) {
+    html += "<div class='launch card'>";
+    html += "<div class='card-header'>";
+    html += "<p><strong>"+val.core_serial+"</strong></p>";
+    html += "</div>";
+    html += "<div class='card-block'>";
+    html += "<p><strong>Status: </strong>" + val.status + "</p>"
+    html += "<p><strong>Original Launch: </strong>" + val.original_launch + "</p>"
+    html += "<p><strong>Missions: </strong></p>"
+    var missions = val.missions;
+    for (i = 0; i < missions.length; i++) {
+      html += "<p>" + missions[i] + "</p>";
+    }
+    // Add landing attempts
+    html += "<p><strong>Details: </strong>" + val.details + "</p>"
+    html += "</div></div>";
+
+    html += "</div>";
+    html += "</div>";
+  })
+  return html;
+}
+// End company info gen
+
+// Function to generate rockets
+function launchpadsGen(json) {
+  var html = "";
+  json.forEach(function(val) {
+    html += "<div class='launch card'>";
+    html += "<div class='card-header'>";
+    html += "<p><strong>"+val.name+"</strong></p>";
+    html += "</div>";
+    html += "<div class='card-block'>";
+    html += "<p><strong>Stages: </strong>" + val.stages + "</p>"
+    if (val.boosters > 0) {
+      html += "<p><strong>Boosters: </strong>" + val.boosters + "</p>"
+    }
+    //html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>"
+    html += "<p><strong>First Flight: </strong>" + val.first_flight + "</p>"
+    //  Add remaining info
+    html += "</div></div>";
+
+    html += "</div>";
+    html += "</div>";
+  });
+  return html;
+}
+// End Rocket Gen Function
+
+
+/********************
+        JSON
+********************/
+
 // Previous Launches
 $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
   var html = "";
@@ -356,6 +439,7 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
   // End launches by year chart
   //
 });
+// End Previous launches
 
 // Upcoming Launches
 $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
@@ -426,7 +510,46 @@ $.getJSON("https://api.spacexdata.com/v2/parts/cores", function(json) {
   $("#detailCores").append(html);
   removeLoad("detailCoresLoad");
 });
-// End Rocket JSON
+// End Detail Cores JSON
+
+// Capsule JSON
+$.getJSON("https://api.spacexdata.com/v2/capsules", function(json) {
+  var html = "";
+
+  // Create the html for each flight
+  html = capsulesGen(json);
+
+  // Add the html to the page
+  $("#capsules").append(html);
+  removeLoad("capsulesLoad");
+});
+// End Capsule JSON
+
+// Detail Capsule JSON
+$.getJSON("https://api.spacexdata.com/v2/parts/caps", function(json) {
+  var html = "";
+
+  // Create the html for each flight
+  html = detailCapsulesGen(json);
+
+  // Add the html to the page
+  $("#detailCapsules").append(html);
+  removeLoad("detailCapsulesLoad");
+});
+// End Detailed Capsule JSON
+
+// Launchpad JSON
+$.getJSON("https://api.spacexdata.com/v2/launchpads", function(json) {
+  var html = "";
+
+  // Create the html for each flight
+  html = launchpadsGen(json);
+
+  // Add the html to the page
+  $("#launchpads").append(html);
+  removeLoad("launchpadsLoad");
+});
+// End Launchpad JSON
 
 // Countdown til launch
 // Set the date we're counting down to
@@ -476,7 +599,6 @@ function sortLaunchNumFirst() {
   $("#sortLaunchFirst").hide();
   $("#sortLaunchLast").show();
 }
-
 function sortLaunchNumLast() {
   var divList = $("#main .launch");
   divList.sort(function(a, b) {
@@ -495,7 +617,7 @@ $("#nextLaunch").on("click", ".toggle-header", function() {
 });
 // End show additional next launch info
 
-// Make reused parts readable
+// Make unpretty JSON readable
 // Remove underscore and make title case
 function toTitleCase(str) {
   str = str.replace("_", " ");
@@ -503,14 +625,14 @@ function toTitleCase(str) {
     return match.toUpperCase();
   });
 }
-// End reused parts readable
+// End JSON readable
 
 // Remove loading icon
 function removeLoad(loadId) {
   loadId = "#" + loadId;
   $(loadId).remove();
 }
-// End loading icon
+// End remove loading icon
 
 // Scroll to top
 $(document).ready(function() {
@@ -531,7 +653,7 @@ $(document).ready(function() {
 });
 // end scroll to top
 
-// Add smooth scrolling to all links
+// Add smooth scrolling to nav links
 $(document).ready(function(){
   $("#navigation").on('click', 'a', function(event) {
 
@@ -555,6 +677,7 @@ $(document).ready(function(){
     } // End if
   });
 });
+// End Smooth Scrolling
 
 
 // Mobile nav menu functionality
@@ -563,6 +686,7 @@ $('#menuTab').on('click', function() {
   $(this).children().toggleClass('fa-bars');
   $(this).children().toggleClass('fa-times');
 });
+// End nav menu functions
 
 // Thanks to https://github.com/r-spacex/SpaceX-API for creating the following APIs
 /*
@@ -576,4 +700,5 @@ Launchpads: https://api.spacexdata.com/v2/launchpads
 Capsule Detail: https://api.spacexdata.com/v2/parts/caps
 Core Detail: https://api.spacexdata.com/v2/parts/cores
 */
+
 // Project by BrennanButler.com
