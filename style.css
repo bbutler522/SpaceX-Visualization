@@ -34,6 +34,7 @@ body {
   display: none;
   color: #fff;
   text-decoration: none;
+  cursor: pointer;
   padding: 20px;
   position: absolute;
   top: 0;
@@ -122,7 +123,7 @@ body {
     float: none;
   }
   #header #navigation li {
-    display: block;
+    display: none;
     float: none !important;
     margin-bottom: 14px;
   }
@@ -137,6 +138,9 @@ body {
   }
   #header #navigation.responsive .region-navigation {
     opacity: 1;
+  }
+  #header #navigation.responsive li {
+    display: block;
   }
 }
 
