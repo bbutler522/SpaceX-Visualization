@@ -8,7 +8,8 @@ http://spacexvisual.com/
 Build using primarily jQuery to work with JSON data and presenting it in an easy to examine format. 
 An initial chart is generated with Google Charts, though more in depth analyses will be added later(Either in GCharts or D3.js)
 
-I would like to incorporate an additional front-end framework to enhance the user experience and to reduce loadtimes, as the number of launches will continue to rise over time.
+Using Webpack, Babel, and React. Compile SCSS and JS using
+`npm run watch`
 
 ## SpaceX
 Find out more about SpaceX on their site at http://www.spacex.com/
