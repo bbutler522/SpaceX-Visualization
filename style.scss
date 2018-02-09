@@ -1,7 +1,7 @@
 // compileExpanded
 
-body {
-  font-family: "Mada", sans-serif;
+body, h1, h2, h3, h4, h5, h6, p {
+  font-family: "Mada", sans-serif !important;
 }
 
 #header {
@@ -18,6 +18,7 @@ body {
     background: #181c1f;
   }
 
+  // Text logo
   h1 {
     color: #fff;
     display: block;
@@ -29,6 +30,7 @@ body {
     text-decoration: none;
   }
 
+  // Navigation -- Navbar
   #navigation {
     top: 0;
     padding-left: 10px;
@@ -156,10 +158,7 @@ body {
   }
 }
 
-#nextLaunch {
-  margin-top: 100px;
-}
-
+// The main card styling for displaying data
 .launch {
   margin: 20px;
   background-color: #eee;
@@ -202,22 +201,21 @@ body {
   }
 }
 
+// Google Charts -- Responsive in JS by Redrawing
 .chart {
   width: 100%;
   min-height: 450px;
 }
 
 #nextLaunch {
+  margin-top: 100px;
+
   .launch {
     width: 100%;
   }
 
   &.hide-details {
-    .card-block {
-      display: none;
-    }
-
-    .card .card {
+    .card-block, .card .card {
       display: none;
     }
 
@@ -247,6 +245,7 @@ body {
   }
 }
 
+// Launch Countdown
 #launchCountdown {
   font-size: 0.7em;
   font-weight: normal;
@@ -257,6 +256,7 @@ body {
   transition: all 0.5s;
 }
 
+// Scroll to Top
 .scrollToTop {
   width: 50px;
   height: 50px;

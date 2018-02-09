@@ -60,15 +60,16 @@
           <!-- Next Launch -->
 
           <div id="nextLaunch" class="row hide-details">
-            <h2 class="col-md-12">Next launch <span id="launchCountdown"></span></h2><i id="nextLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i></div>
-
+            <h2 class="col-md-12">Next launch <span id="launchCountdown"></span></h2><i id="nextLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
+          </div>
           <hr/>
+
           <!-- Chart of Launches by Year -->
           <h2>SpaceX in Charts</h2>
           <div id="chart_div"></div>
           <i id="chartLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
-
           <hr/>
+
           <h2>Previous Launches </h2>
           <button id="sortLaunchFirst" class="btn btn-info">Show latest first</button>
           <button id="sortLaunchLast" class="btn btn-info" style="display: none;">Show earliest first</button>
@@ -76,40 +77,37 @@
 
           <div id="main" class="row list"></div>
           <i id="previousLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
-
           <hr/>
+
           <h2>Upcoming Launches</h2>
           <a href="#main" class="btn btn-secondary">Previous Launches</a>
           <div id="upcoming" class="row"></div>
           <p>Only planned launches are shown. All future missions available at <a href="http://www.spacex.com/missions#future-missions-header" target="_blank">http://www.spacex.com/missions#future-missions-header</a></p>
           <i id="upcomingLoad" class="fas fa-circle-notch fa-spin" data-fa-transform="grow-5"></i>
-
           <hr/>
+
           <h2>Company Info</h2>
           <div id="company"></div>
-
           <hr/>
+
           <h2>Rocket Info</h2>
           <div id="rockets" class="row"></div>
 
           <h2>Detailed Rocket Info</h2>
           <div id="detailCores" class="row"></div>
-
-
           <hr/>
+
           <h2>Capsule Info</h2>
           <div id="capsules"></div>
 
           <h2>Detailed Capsule Info</h2>
           <div id="detailCapsules"></div>
-
-
           <hr/>
+
           <h2>Launchpad Info</h2>
           <div id="launchpads"></div>
-
-
           <hr/>
+
           <p id="about">API's used:<br/><a href="https://api.spacexdata.com/v2/launches" target="_blank">https://api.spacexdata.com/v2/launches</a><br/><a href="https://api.spacexdata.com/v2/launches/upcoming" target="_blank">https://api.spacexdata.com/v2/launches/upcoming</a></p>
           <p class="alert alert-info">Work in progress, some content is still being built and a lot of improvements to follow. Track updates on GitHub.</p>
           <p>GitHub:<br/><a href="https://github.com/bbutler522/SpaceX-Visualization" target="_blank">https://github.com/bbutler522/SpaceX-Visualization</a></p>
@@ -121,5 +119,5 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="main.js"></script>
+  <script src="bundle.js"></script>
 </body>

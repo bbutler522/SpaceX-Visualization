@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 /* Organization
 - HTML generators from JSON
 - JSON functions
@@ -8,7 +11,6 @@
 - Scroll to Top
 - Smooth anchor scrolling
 */
-
 
 /********************
      Generators
@@ -105,13 +107,13 @@ function launchGen(json) {
       '"><div class="card-block">';
     // For each payload do
     var payload = val.rocket.second_stage.payloads;
-    for (i = 0; i < payload.length; i++) {
+    for (var i = 0; i < payload.length; i++) {
       html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
       html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
 
       html += "<p><strong>Customers:</strong> ";
       // Get the customers
-      for (j = 0; j < payload[i].customers.length; j++) {
+      for (var j = 0; j < payload[i].customers.length; j++) {
         html += "<br/>" + payload[i].customers[j];
       }
       html += "<hr/>";
@@ -192,13 +194,13 @@ function nextLaunchGen(json) {
     '"><div class="card-block">';
   // For each payload do
   var payload = val.rocket.second_stage.payloads;
-  for (i = 0; i < payload.length; i++) {
+  for (var i = 0; i < payload.length; i++) {
     html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
     html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
 
     html += "<p><strong>Customers:</strong> ";
     // Get the customers
-    for (j = 0; j < payload[i].customers.length; j++) {
+    for (var j = 0; j < payload[i].customers.length; j++) {
       html += "<br/>" + payload[i].customers[j];
     }
     html += "<hr/>";
@@ -275,7 +277,7 @@ function detailCoresGen(json) {
     html += "<p><strong>Original Launch: </strong>" + val.original_launch + "</p>"
     html += "<p><strong>Missions: </strong></p>"
     var missions = val.missions;
-    for (i = 0; i < missions.length; i++) {
+    for (var i = 0; i < missions.length; i++) {
       html += "<p>" + missions[i] + "</p>";
     }
     // Add landing attempts
@@ -327,7 +329,7 @@ function detailCapsulesGen(json) {
     html += "<p><strong>Original Launch: </strong>" + val.original_launch + "</p>"
     html += "<p><strong>Missions: </strong></p>"
     var missions = val.missions;
-    for (i = 0; i < missions.length; i++) {
+    for (var i = 0; i < missions.length; i++) {
       html += "<p>" + missions[i] + "</p>";
     }
     // Add landing attempts
@@ -386,14 +388,14 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
   **  to track how many launches there were each year */
   var years = [];
   var dteNow = new Date().getFullYear();
-  for (i = 2006; i <= dteNow; i++) {
+  for (var i = 2006; i <= dteNow; i++) {
     years.push([i, 0]);
   }
 
   // Go through the json and add one to the year each launch matches.
   // Could be a more time efficient algorithm.
   json.forEach(function(val) {
-    for (i = 0; i < years.length; i++) {
+    for (var i = 0; i < years.length; i++) {
       if (val.launch_year == years[i][0]) {
         years[i][1] += 1;
       }

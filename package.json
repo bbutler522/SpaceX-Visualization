@@ -1,0 +1,36 @@
+{
+  "name": "spacex-visualization",
+  "version": "1.0.0",
+  "description": "A visualization of SpaceX launches",
+  "main": "main.js",
+  "scripts": {
+    "test": "npm run scss-compile",
+    "scss": "node-sass --watch style.scss > style.css",
+    "build": "webpack",
+    "watch": "node-sass --watch style.scss > style.css | webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbutler522/SpaceX-Visualization.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bbutler522/SpaceX-Visualization/issues"
+  },
+  "homepage": "https://github.com/bbutler522/SpaceX-Visualization#readme",
+  "dependencies": {
+    "lodash": "^4.17.5",
+    "node-sass": "^4.7.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.10.0"
+  }
+}
