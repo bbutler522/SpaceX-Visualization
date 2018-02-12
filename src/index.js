@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Moment from 'moment';
 
 /* Organization
 - HTML generators from JSON
@@ -15,6 +16,133 @@ import ReactDOM from 'react-dom';
 /********************
      Generators
 ********************/
+
+export default class UserList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {launch: []};
+  }
+
+  componentDidMount() {
+    this.UserList();
+  }
+
+  UserList() {
+    /*$.getJSON('https://api.spacexdata.com/v2/launches')
+      .then(({ data }) => this.setState({ person: data }));*/
+      fetch("https://api.spacexdata.com/v2/launches")
+      .then(response => response.json())
+      .then(json =>{
+         this.setState({ launch: json })
+      });
+  }
+
+  render() {
+    Moment.locale('en');
+    const launches = this.state.launch.reverse().map((item, i) => (
+      <div data-launch={item.flight_number} className='launch card'>
+        <div className='card-header'>
+          <p><strong>Flight #:</strong> { item.flight_number }</p>
+          {item.links.mission_patch !== null ? <img className='launch-patch img-fluid' src={item.links.mission_patch} /> : false}
+        </div>
+        <div className='card-block'>
+          <p className='date'><strong>Launch Date:</strong> {Moment(item.launch_date_unix*1000).format('MM/DD/YYYY')}</p>
+          <p><strong>Rocket Name:</strong> {item.rocket.rocket_name}</p>
+          <p><strong>Rocket Type:</strong> {item.rocket.rocket_type}</p>
+          {item.launch_success !== null ?
+            (item.launch_success === true ?
+              <p className='launch-success'><strong>Launch Successful</strong></p> :
+              <p className='launch-failure'><strong>Launch Failure</strong></p>
+            ) : false
+          }
+          {item.rocket.first_stage.cores[0].land_success === true ? <p className="text-info"><strong>Landing Successful</strong></p> : false}
+
+        </div>
+      </div>
+    ));
+
+    /*
+
+    var reuse = val.reuse;
+    $.each(reuse, function(key, value) {
+      if (value === true) {
+        key = toTitleCase(key);
+        html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
+      }
+    });
+    if (val.telemetry.flight_club !== null) {
+      html +=
+        '<p><a href="' +
+        val.telemetry.flight_club +
+        '" target="_blank">Telemetry</a></p>';
+    }
+
+    html +=
+      '<div class="accordion" id="accordion' +
+      num +
+      '" role="tablist" aria-multiselectable="true">';
+    if (val.details !== null) {
+      html +=
+        '<div class="card border-left-0 border-right-0  border-left-0 border-bottom-0"><div class="card-header" role="tab" id="headingOne' +
+        num +
+        '"><h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion' +
+        num +
+        '" href="#collapseOne' +
+        num +
+        '" aria-expanded="true" aria-controls="collapseOne' +
+        num +
+        '">Details</a></h5></div><div id="collapseOne' +
+        num +
+        '" class="collapse" role="tabpanel" aria-labelledby="headingOne' +
+        num +
+        '"><div class="card-block">' +
+        val.details +
+        "</div>";
+    }
+
+    html +=
+      '</div></div><div class="card border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
+      num +
+      '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' +
+      num +
+      '" href="#collapseThree' +
+      num +
+      '" aria-expanded="false" aria-controls="collapseThree' +
+      num +
+      '">Payload</a></h5></div><div id="collapseThree' +
+      num +
+      '" class="collapse" role="tabpanel" aria-labelledby="headingThree' +
+      num +
+      '"><div class="card-block">';
+    // For each payload do
+    var payload = val.rocket.second_stage.payloads;
+    for (var i = 0; i < payload.length; i++) {
+      html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
+      html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
+
+      html += "<p><strong>Customers:</strong> ";
+      // Get the customers
+      for (var j = 0; j < payload[i].customers.length; j++) {
+        html += "<br/>" + payload[i].customers[j];
+      }
+      html += "<hr/>";
+    }
+    */
+
+    console.log(this.state)
+    return (
+      <div id="layout-content" className="layout-content-wrapper">
+        <div className="panel-list row list">{ launches }</div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <UserList />,
+  document.getElementById('previousLaunches')
+);
 
 // Function to generate launches from JSON input
 function launchGen(json) {
