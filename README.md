@@ -11,6 +11,8 @@ An initial chart is generated with Google Charts, though more in depth analyses 
 Using Webpack, Babel, and React. Compile SCSS and JS using
 `npm run watch`
 
+Install locally with `npm install`
+
 ## SpaceX
 Find out more about SpaceX on their site at http://www.spacex.com/
 - I am not affiliated with SpaceX in any way
