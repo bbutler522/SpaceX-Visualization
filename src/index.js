@@ -28,9 +28,8 @@ export default class UserList extends React.Component {
     this.UserList();
   }
 
+  // Get the JSON
   UserList() {
-    /*$.getJSON('https://api.spacexdata.com/v2/launches')
-      .then(({ data }) => this.setState({ person: data }));*/
       fetch("https://api.spacexdata.com/v2/launches")
       .then(response => response.json())
       .then(json =>{
@@ -58,12 +57,68 @@ export default class UserList extends React.Component {
           }
           {item.rocket.first_stage.cores[0].land_success === true ? <p className="text-info"><strong>Landing Successful</strong></p> : false}
 
+          {/* Add in Reusable parts section here */}
+          {
+              $.map(item.reuse, function(type,index) {
+                  return type === true ? <p class="text-info"><strong>Reused {toTitleCase(index)}</strong></p> : false;
+              })
+          }
+
+          {item.telemetry.flight_club !== null ? <p><a href={item.telemetry.flight_club} target="_blank">Telemetry</a></p> : false}
+          <div className="accordion" id={"accordion" + item.flight_number} role="tablist" aria-multiselectable="true">
+            {item.details !== null ?
+              <div className="card border-left-0 border-right-0  border-left-0 border-bottom-0">
+                <div className="card-header" role="tab" id={"headingOne" + item.flight_number}>
+                  <h5 className="mb-0">
+                    <a data-toggle="collapse" data-parent={"#accordion" + item.flight_number} href={"#collapseOne" + item.flight_number} aria-expanded="true" aria-controls={"collapseOne" + item.flight_number}>Details</a>
+                  </h5>
+                </div>
+                <div id={"collapseOne" + item.flight_number} className="collapse" role="tabpanel" aria-labelledby={"headingOne" + item.flight_number}>
+                  <div className="card-block">
+                    {item.details}
+                  </div>
+                </div>
+              </div>
+            : false}
+            <div className="card border-left-0 border-right-0 border-bottom-0">
+              <div className="card-header" role="tab" id={"headingThree" + item.flight_number}>
+                <h5 className="mb-0">
+                  <a className="collapsed" data-toggle="collapse" data-parent={"#accordion" + item.flight_number} href={"#collapseThree" + item.flight_number} aria-expanded="false" aria-controls={"collapseThree" + item.flight_number}>Payload</a>
+                </h5>
+              </div>
+              <div id={"collapseThree" + item.flight_number} className="collapse" role="tabpanel" aria-labelledby={"headingThree" + item.flight_number}>
+                <div className="card-block">
+                    {
+                        item.rocket.second_stage.payloads.map((payloads, index) => {
+                            return payloads.payload_id !== null ?
+                              <div>
+                                <p><strong>ID:</strong> {payloads.payload_id}</p>
+                                <p><strong>Type:</strong> {payloads.payload_type}</p>
+                                <p><strong>Customers:</strong></p>
+                                {
+                                    payloads.customers.map((customers, index) => {
+                                        return customers !== null ?
+                                          <div>
+                                            {customers}
+                                            <br/>
+                                          </div>
+                                        : false
+                                    })
+                                }
+                                <hr/>
+                              </div>
+                            : false
+                        })
+                    }
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     ));
 
     /*
-
     var reuse = val.reuse;
     $.each(reuse, function(key, value) {
       if (value === true) {
@@ -71,63 +126,7 @@ export default class UserList extends React.Component {
         html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
       }
     });
-    if (val.telemetry.flight_club !== null) {
-      html +=
-        '<p><a href="' +
-        val.telemetry.flight_club +
-        '" target="_blank">Telemetry</a></p>';
-    }
 
-    html +=
-      '<div class="accordion" id="accordion' +
-      num +
-      '" role="tablist" aria-multiselectable="true">';
-    if (val.details !== null) {
-      html +=
-        '<div class="card border-left-0 border-right-0  border-left-0 border-bottom-0"><div class="card-header" role="tab" id="headingOne' +
-        num +
-        '"><h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion' +
-        num +
-        '" href="#collapseOne' +
-        num +
-        '" aria-expanded="true" aria-controls="collapseOne' +
-        num +
-        '">Details</a></h5></div><div id="collapseOne' +
-        num +
-        '" class="collapse" role="tabpanel" aria-labelledby="headingOne' +
-        num +
-        '"><div class="card-block">' +
-        val.details +
-        "</div>";
-    }
-
-    html +=
-      '</div></div><div class="card border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
-      num +
-      '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' +
-      num +
-      '" href="#collapseThree' +
-      num +
-      '" aria-expanded="false" aria-controls="collapseThree' +
-      num +
-      '">Payload</a></h5></div><div id="collapseThree' +
-      num +
-      '" class="collapse" role="tabpanel" aria-labelledby="headingThree' +
-      num +
-      '"><div class="card-block">';
-    // For each payload do
-    var payload = val.rocket.second_stage.payloads;
-    for (var i = 0; i < payload.length; i++) {
-      html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
-      html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
-
-      html += "<p><strong>Customers:</strong> ";
-      // Get the customers
-      for (var j = 0; j < payload[i].customers.length; j++) {
-        html += "<br/>" + payload[i].customers[j];
-      }
-      html += "<hr/>";
-    }
     */
 
     console.log(this.state)
