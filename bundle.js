@@ -17725,15 +17725,21 @@ function launchpadsGen(json) {
   json.forEach(function (val) {
     html += "<div class='launch card'>";
     html += "<div class='card-header'>";
-    html += "<p><strong>" + val.name + "</strong></p>";
+    html += "<p><strong>" + val.full_name + "</strong></p>";
     html += "</div>";
     html += "<div class='card-block'>";
-    html += "<p><strong>Stages: </strong>" + val.stages + "</p>";
-    if (val.boosters > 0) {
-      html += "<p><strong>Boosters: </strong>" + val.boosters + "</p>";
+    html += "<p><strong>Location: </strong></p>";
+    html += "<p>" + val.location.name + "<br/>";
+    html += val.location.region + "<br/>";
+    html += val.location.latitude + ", " + val.location.longitude + "<br/>";
+    html += "<a href='https://www.google.com/maps/@" + val.location.latitude + "," + val.location.longitude + ",15z'>Google Maps</a>";
+    html += "<p><strong>Vehicles Launched: </strong></p>";
+    var vehicles = val.vehicles_launched;
+    for (var i = 0; i < vehicles.length; i++) {
+      html += "<p>" + vehicles[i] + "</p>";
     }
     //html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>"
-    html += "<p><strong>First Flight: </strong>" + val.first_flight + "</p>";
+    html += "<p><strong>Details: </strong>" + val.details + "</p>";
     //  Add remaining info
     html += "</div></div>";
 
