@@ -17192,7 +17192,12 @@ var UserList = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (UserList.__proto__ || Object.getPrototypeOf(UserList)).call(this, props));
 
-    _this.state = { launch: [] };
+    _this.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
 
@@ -17214,6 +17219,13 @@ var UserList = function (_React$Component) {
       }).then(function (json) {
         _this2.setState({ launch: json });
       });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches });
     }
   }, {
     key: 'render',
@@ -17427,20 +17439,14 @@ var UserList = function (_React$Component) {
         );
       });
 
-      /*
-      var reuse = val.reuse;
-      $.each(reuse, function(key, value) {
-        if (value === true) {
-          key = toTitleCase(key);
-          html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
-        }
-      });
-        */
-
-      console.log(this.state);
       return _react2.default.createElement(
         'div',
         { id: 'layout-content', className: 'layout-content-wrapper' },
+        _react2.default.createElement(
+          'button',
+          { onClick: this.handleClick },
+          'Show'
+        ),
         _react2.default.createElement(
           'div',
           { className: 'panel-list row list' },

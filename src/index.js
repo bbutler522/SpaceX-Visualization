@@ -21,7 +21,12 @@ export default class UserList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {launch: []};
+    this.state = {
+      launch: [],
+      reversed: true
+    };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +40,12 @@ export default class UserList extends React.Component {
       .then(json =>{
          this.setState({ launch: json })
       });
+  }
+
+  handleClick() {
+    // Because we reverse the launch array on render, pass the current launch array
+    const reverseLaunches = this.state.launch
+    this.setState( { launch: reverseLaunches } );
   }
 
   render() {
@@ -118,20 +129,9 @@ export default class UserList extends React.Component {
       </div>
     ));
 
-    /*
-    var reuse = val.reuse;
-    $.each(reuse, function(key, value) {
-      if (value === true) {
-        key = toTitleCase(key);
-        html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
-      }
-    });
-
-    */
-
-    console.log(this.state)
     return (
       <div id="layout-content" className="layout-content-wrapper">
+        <button onClick={this.handleClick}>Show</button>
         <div className="panel-list row list">{ launches }</div>
       </div>
     );
