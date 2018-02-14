@@ -419,7 +419,7 @@ function detailCoresGen(json) {
 }
 // End company info gen
 
-// Function to generate rockets
+// Function to generate capsules
 function capsulesGen(json) {
   var html = "";
   json.forEach(function(val) {
@@ -428,12 +428,10 @@ function capsulesGen(json) {
     html += "<p><strong>"+val.name+"</strong></p>";
     html += "</div>";
     html += "<div class='card-block'>";
-    html += "<p><strong>Stages: </strong>" + val.stages + "</p>"
     if (val.crew_capacity > 0) {
       html += "<p><strong>Crew Capacity: </strong>" + val.crew_capacity + "</p>"
     }
-    //html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>"
-    html += "<p><strong>First Flight: </strong>" + val.first_flight + "</p>"
+
     //  Add remaining info
     html += "</div></div>";
 
@@ -442,15 +440,15 @@ function capsulesGen(json) {
   });
   return html;
 }
-// End Rocket Gen Function
+// End capsules
 
-// Generate Detail Cores
+// Generate Detail capsules
 function detailCapsulesGen(json) {
   var html = "";
   json.forEach(function(val) {
     html += "<div class='launch card'>";
     html += "<div class='card-header'>";
-    html += "<p><strong>"+val.core_serial+"</strong></p>";
+    html += "<p><strong>"+val.capsule_serial +"</strong> ("+val.type+")</p>";
     html += "</div>";
     html += "<div class='card-block'>";
     html += "<p><strong>Status: </strong>" + val.status + "</p>"
@@ -469,7 +467,7 @@ function detailCapsulesGen(json) {
   })
   return html;
 }
-// End company info gen
+// End capsules
 
 // Function to generate rockets
 function launchpadsGen(json) {
