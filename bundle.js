@@ -17184,34 +17184,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      Generators
 ********************/
 
-var UserList = function (_React$Component) {
-  _inherits(UserList, _React$Component);
+var PreviousLaunches = function (_React$Component) {
+  _inherits(PreviousLaunches, _React$Component);
 
-  function UserList(props) {
-    _classCallCheck(this, UserList);
+  function PreviousLaunches(props) {
+    _classCallCheck(this, PreviousLaunches);
 
-    var _this = _possibleConstructorReturn(this, (UserList.__proto__ || Object.getPrototypeOf(UserList)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (PreviousLaunches.__proto__ || Object.getPrototypeOf(PreviousLaunches)).call(this, props));
 
     _this.state = {
       launch: [],
-      reversed: true
+      reversed: false
     };
 
     _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
 
-  _createClass(UserList, [{
+  _createClass(PreviousLaunches, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.UserList();
+      this.PreviousLaunches();
     }
 
     // Get the JSON
 
   }, {
-    key: 'UserList',
-    value: function UserList() {
+    key: 'PreviousLaunches',
+    value: function PreviousLaunches() {
       var _this2 = this;
 
       fetch("https://api.spacexdata.com/v2/launches").then(function (response) {
@@ -17225,7 +17225,8 @@ var UserList = function (_React$Component) {
     value: function handleClick() {
       // Because we reverse the launch array on render, pass the current launch array
       var reverseLaunches = this.state.launch;
-      this.setState({ launch: reverseLaunches });
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
     }
   }, {
     key: 'render',
@@ -17316,7 +17317,7 @@ var UserList = function (_React$Component) {
             $.map(item.reuse, function (type, index) {
               return type === true ? _react2.default.createElement(
                 'p',
-                { 'class': 'text-info' },
+                { className: 'text-info' },
                 _react2.default.createElement(
                   'strong',
                   null,
@@ -17439,13 +17440,20 @@ var UserList = function (_React$Component) {
         );
       });
 
+      var buttonText = null;
+      if (this.state.reversed) {
+        buttonText = "Show latest first";
+      } else {
+        buttonText = "Show earliest first";
+      }
+
       return _react2.default.createElement(
         'div',
         { id: 'layout-content', className: 'layout-content-wrapper' },
         _react2.default.createElement(
           'button',
-          { onClick: this.handleClick },
-          'Show'
+          { className: 'btn btn-info', onClick: this.handleClick },
+          buttonText
         ),
         _react2.default.createElement(
           'div',
@@ -17456,13 +17464,13 @@ var UserList = function (_React$Component) {
     }
   }]);
 
-  return UserList;
+  return PreviousLaunches;
 }(_react2.default.Component);
 
-exports.default = UserList;
+exports.default = PreviousLaunches;
 
 
-_reactDom2.default.render(_react2.default.createElement(UserList, null), document.getElementById('previousLaunches'));
+_reactDom2.default.render(_react2.default.createElement(PreviousLaunches, null), document.getElementById('previousLaunches'));
 
 // Function to generate launches from JSON input
 function launchGen(json) {

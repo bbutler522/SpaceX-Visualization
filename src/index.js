@@ -17,24 +17,24 @@ import Moment from 'moment';
      Generators
 ********************/
 
-export default class UserList extends React.Component {
+export default class PreviousLaunches extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       launch: [],
-      reversed: true
+      reversed: false
     };
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    this.UserList();
+    this.PreviousLaunches();
   }
 
   // Get the JSON
-  UserList() {
+  PreviousLaunches() {
       fetch("https://api.spacexdata.com/v2/launches")
       .then(response => response.json())
       .then(json =>{
@@ -45,7 +45,8 @@ export default class UserList extends React.Component {
   handleClick() {
     // Because we reverse the launch array on render, pass the current launch array
     const reverseLaunches = this.state.launch
-    this.setState( { launch: reverseLaunches } );
+    this.setState( { launch: reverseLaunches, reversed: !this.state.reversed } );
+    console.log(this.state)
   }
 
   render() {
@@ -71,7 +72,7 @@ export default class UserList extends React.Component {
           {/* Add in Reusable parts section here */}
           {
               $.map(item.reuse, function(type,index) {
-                  return type === true ? <p class="text-info"><strong>Reused {toTitleCase(index)}</strong></p> : false;
+                  return type === true ? <p className="text-info"><strong>Reused {toTitleCase(index)}</strong></p> : false;
               })
           }
 
@@ -129,9 +130,16 @@ export default class UserList extends React.Component {
       </div>
     ));
 
+    let buttonText = null;
+    if (this.state.reversed) {
+      buttonText = "Show latest first";
+    } else {
+      buttonText = "Show earliest first";
+    }
+
     return (
       <div id="layout-content" className="layout-content-wrapper">
-        <button onClick={this.handleClick}>Show</button>
+        <button className='btn btn-info' onClick={this.handleClick}>{ buttonText }</button>
         <div className="panel-list row list">{ launches }</div>
       </div>
     );
@@ -139,7 +147,7 @@ export default class UserList extends React.Component {
 }
 
 ReactDOM.render(
-  <UserList />,
+  <PreviousLaunches />,
   document.getElementById('previousLaunches')
 );
 
