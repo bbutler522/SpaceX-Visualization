@@ -17440,20 +17440,15 @@ var PreviousLaunches = function (_React$Component) {
         );
       });
 
-      var buttonText = null;
-      if (this.state.reversed) {
-        buttonText = "Show latest first";
-      } else {
-        buttonText = "Show earliest first";
-      }
-
       return _react2.default.createElement(
         'div',
         { id: 'layout-content', className: 'layout-content-wrapper' },
         _react2.default.createElement(
           'button',
           { className: 'btn btn-info', onClick: this.handleClick },
-          buttonText
+          'Show ',
+          this.state.reversed ? 'lastest' : 'earliest',
+          ' first'
         ),
         _react2.default.createElement(
           'div',
@@ -17756,15 +17751,8 @@ function launchpadsGen(json) {
 
 // Previous Launches
 $.getJSON("https://api.spacexdata.com/v2/launches", function (json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = launchGen(json);
-
-  // Add the html to the page
-  $("#main").append(html);
   removeLoad("previousLoad");
-  sortLaunchNumFirst();
+
   /* Create an array of the years since the first launch
   **  to track how many launches there were each year */
   var years = [];
@@ -17966,36 +17954,20 @@ function launchCountdown(launchTime) {
 }
 // End Countdown Function
 
-// Sorting Previous Launches
-$("#sortLaunchFirst").on("click", sortLaunchNumFirst);
-$("#sortLaunchLast").on("click", sortLaunchNumLast);
-
-function sortLaunchNumFirst() {
-  var divList = $("#main .launch");
-  divList.sort(function (a, b) {
-    return $(b).data("launch") - $(a).data("launch");
-  });
-  $("#main").html(divList);
-  $("#sortLaunchFirst").hide();
-  $("#sortLaunchLast").show();
-}
-function sortLaunchNumLast() {
-  var divList = $("#main .launch");
-  divList.sort(function (a, b) {
-    return $(a).data("launch") - $(b).data("launch");
-  });
-  $("#main").html(divList);
-  $("#sortLaunchLast").hide();
-  $("#sortLaunchFirst").show();
-}
-// End Sorting Previous Launches
-
 // Show additional next launch info
 $("#nextLaunch").on("click", ".toggle-header", function () {
   $("#nextLaunch").toggleClass("hide-details");
   $("#nextLaunch").toggleClass("show-details");
 });
 // End show additional next launch info
+
+// Show charts
+$('#showCharts').on('click', function () {
+  $('#chart_div').css('height', 'auto');
+  $('#chart_div').css('opacity', '1');
+  $(this).hide();
+});
+// End Show Charts
 
 // Make unpretty JSON readable
 // Remove underscore and make title case
@@ -18034,27 +18006,18 @@ $(document).ready(function () {
 // end scroll to top
 
 // Add smooth scrolling to nav links
-$(document).ready(function () {
-  $("#navigation").on('click', 'a', function (event) {
-
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function () {
-
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
+$(function () {
+  $('a').click(function () {
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - 200
+        }, 1000);
+        return false;
+      }
+    }
   });
 });
 // End Smooth Scrolling
