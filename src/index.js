@@ -503,15 +503,8 @@ function launchpadsGen(json) {
 
 // Previous Launches
 $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = launchGen(json);
-
-  // Add the html to the page
-  $("#main").append(html);
   removeLoad("previousLoad");
-  sortLaunchNumFirst();
+
   /* Create an array of the years since the first launch
   **  to track how many launches there were each year */
   var years = [];
@@ -715,30 +708,6 @@ function launchCountdown(launchTime) {
   }, 1000);
 }
 // End Countdown Function
-
-// Sorting Previous Launches
-$("#sortLaunchFirst").on("click", sortLaunchNumFirst);
-$("#sortLaunchLast").on("click", sortLaunchNumLast);
-
-function sortLaunchNumFirst() {
-  var divList = $("#main .launch");
-  divList.sort(function(a, b) {
-    return $(b).data("launch") - $(a).data("launch");
-  });
-  $("#main").html(divList);
-  $("#sortLaunchFirst").hide();
-  $("#sortLaunchLast").show();
-}
-function sortLaunchNumLast() {
-  var divList = $("#main .launch");
-  divList.sort(function(a, b) {
-    return $(a).data("launch") - $(b).data("launch");
-  });
-  $("#main").html(divList);
-  $("#sortLaunchLast").hide();
-  $("#sortLaunchFirst").show();
-}
-// End Sorting Previous Launches
 
 // Show additional next launch info
 $("#nextLaunch").on("click", ".toggle-header", function() {
