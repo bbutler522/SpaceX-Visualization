@@ -17982,6 +17982,25 @@ function removeLoad(loadId) {
 }
 // End remove loading icon
 
+// Use Your Class or ID For Selection
+$(document).ready(function () {
+  $(document).on("scroll", onScroll);
+});
+function onScroll(event) {
+  var scrollPos = $(document).scrollTop();
+  scrollPos += 200;
+  $('#navigation li a').each(function () {
+    var currLink = $(this);
+    var refElement = $(currLink.attr("href"));
+    if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+      $('#navigation li a').removeClass("active");
+      currLink.addClass("active");
+    } else {
+      currLink.removeClass("active");
+    }
+  });
+}
+
 // Scroll to top
 $(document).ready(function () {
   //Check to see if the window is top if not then display button
@@ -18017,7 +18036,6 @@ $(function () {
   });
 });
 // End Smooth Scrolling
-
 
 // Mobile nav menu functionality
 $('#menuTab').on('click', function () {

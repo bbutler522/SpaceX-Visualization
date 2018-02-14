@@ -78,7 +78,7 @@ body, h1, h2, h3, h4, h5, h6, p {
             text-decoration: none;
             border-bottom: 2px solid transparent;
 
-            &:hover {
+            &:hover, &.active {
               transition: border 0.2s ease;
               border-bottom-color: #ccac55;
             }
@@ -94,7 +94,7 @@ body, h1, h2, h3, h4, h5, h6, p {
         a {
           color: #8b939b;
 
-          &:hover {
+          &:hover, &.active  {
             border-bottom-color: #8b939b;
           }
         }
@@ -154,6 +154,10 @@ body, h1, h2, h3, h4, h5, h6, p {
       }
     }
   }
+}
+
+#about {
+  margin-bottom: 100px;
 }
 
 // The main card styling for displaying data

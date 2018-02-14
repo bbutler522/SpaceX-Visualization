@@ -184,3 +184,378 @@ body, h1, h2, h3, h4, h5, h6, p {
     .scrollToTop:hover svg {
       margin-bottom: 2px;
       transition: all 0.3s; }
+body, h1, h2, h3, h4, h5, h6, p {
+  font-family: "Mada", sans-serif !important; }
+
+#header {
+  position: fixed;
+  z-index: 5;
+  height: 75px;
+  background: #181c1f;
+  width: 100%; }
+  #header .header-inner {
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    background: #181c1f; }
+  #header h1 {
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 26px; }
+  #header a:hover {
+    text-decoration: none; }
+  #header #navigation {
+    top: 0;
+    padding-left: 10px;
+    padding-right: 10px; }
+    #header #navigation #menuTab {
+      display: none;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 20px;
+      position: absolute;
+      top: 0;
+      right: 0; }
+    #header #navigation .main-nav {
+      position: relative;
+      padding-top: 20px;
+      height: 100%;
+      letter-spacing: 0.05em; }
+      #header #navigation .main-nav #logo {
+        float: left;
+        margin: 0;
+        padding: 0;
+        margin-top: -8px; }
+      #header #navigation .main-nav ul {
+        margin: 0 0 0 20px;
+        padding: 0;
+        text-align: left;
+        padding-top: 7px;
+        text-transform: uppercase; }
+        #header #navigation .main-nav ul li {
+          float: left;
+          margin-right: 0;
+          padding: 0;
+          list-style-type: none;
+          list-style-image: none;
+          margin-left: 18px; }
+          #header #navigation .main-nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 2px solid transparent; }
+            #header #navigation .main-nav ul li a:hover, #header #navigation .main-nav ul li a.active {
+              transition: border 0.2s ease;
+              border-bottom-color: #ccac55; }
+      #header #navigation .main-nav .nav-secondary {
+        font-weight: 500;
+        font-size: 12px;
+        padding-top: 4px; }
+        #header #navigation .main-nav .nav-secondary a {
+          color: #8b939b; }
+          #header #navigation .main-nav .nav-secondary a:hover, #header #navigation .main-nav .nav-secondary a.active {
+            border-bottom-color: #8b939b; }
+    @media (min-width: 480px) {
+      #header #navigation {
+        position: absolute;
+        top: 0;
+        height: 3em;
+        width: 100%; } }
+    @media (max-width: 991px) {
+      #header #navigation .region-navigation {
+        transition: all 0.2s;
+        opacity: 0; }
+      #header #navigation #menuTab {
+        float: right;
+        display: block;
+        transition: all 2s; }
+        #header #navigation #menuTab:active {
+          transform: rotate(180deg); }
+      #header #navigation h1 {
+        float: none; }
+      #header #navigation li {
+        display: none;
+        float: none !important;
+        margin-bottom: 14px; }
+        #header #navigation li.first {
+          margin-top: 20px; }
+      #header #navigation .region-navigation {
+        position: absolute;
+        width: 100%;
+        background-color: #181c1f;
+        opacity: 0; }
+      #header #navigation.responsive .region-navigation {
+        opacity: 1; }
+      #header #navigation.responsive li {
+        display: block; } }
+
+.launch {
+  margin: 20px;
+  background-color: #eee;
+  box-shadow: 0 0 2px #ccc;
+  border-radius: 5px;
+  width: 100%; }
+  .launch .card-header p {
+    margin-bottom: 0;
+    float: left; }
+  .launch .card-header .launch-patch {
+    float: right;
+    max-height: 100px; }
+  .launch .card-block {
+    padding: 20px 20px 0; }
+  .launch .launch-failure {
+    color: #900; }
+  .launch .launch-success {
+    color: #050; }
+  .launch .accordion .card {
+    margin: auto -20px; }
+  @media (min-width: 992px) {
+    .launch {
+      width: 29%; } }
+
+.chart {
+  width: 100%;
+  min-height: 450px; }
+
+#nextLaunch {
+  margin-top: 100px; }
+  #nextLaunch .launch {
+    width: 100%; }
+  #nextLaunch.hide-details .card-block, #nextLaunch.hide-details .card .card {
+    display: none; }
+  #nextLaunch.hide-details .toggle-header {
+    cursor: pointer; }
+    #nextLaunch.hide-details .toggle-header::after {
+      content: "Display additional info";
+      font-size: 0.8em;
+      margin-left: 20px;
+      color: #444; }
+  #nextLaunch.show-details .toggle-header {
+    cursor: pointer; }
+    #nextLaunch.show-details .toggle-header::after {
+      content: "Hide additional info";
+      font-size: 0.8em;
+      margin-left: 20px;
+      color: #444; }
+
+#launchCountdown {
+  font-size: 0.7em;
+  font-weight: normal;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.5s; }
+
+.scrollToTop {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px;
+  text-align: center;
+  background: whiteSmoke;
+  font-weight: bold;
+  color: #444;
+  text-decoration: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display: none;
+  background: #ddd; }
+  .scrollToTop svg {
+    transition: all 0.3s; }
+  .scrollToTop:hover {
+    text-decoration: none; }
+    .scrollToTop:hover svg {
+      margin-bottom: 2px;
+      transition: all 0.3s; }
+body, h1, h2, h3, h4, h5, h6, p {
+  font-family: "Mada", sans-serif !important; }
+
+#header {
+  position: fixed;
+  z-index: 5;
+  height: 75px;
+  background: #181c1f;
+  width: 100%; }
+  #header .header-inner {
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    background: #181c1f; }
+  #header h1 {
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 26px; }
+  #header a:hover {
+    text-decoration: none; }
+  #header #navigation {
+    top: 0;
+    padding-left: 10px;
+    padding-right: 10px; }
+    #header #navigation #menuTab {
+      display: none;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 20px;
+      position: absolute;
+      top: 0;
+      right: 0; }
+    #header #navigation .main-nav {
+      position: relative;
+      padding-top: 20px;
+      height: 100%;
+      letter-spacing: 0.05em; }
+      #header #navigation .main-nav #logo {
+        float: left;
+        margin: 0;
+        padding: 0;
+        margin-top: -8px; }
+      #header #navigation .main-nav ul {
+        margin: 0 0 0 20px;
+        padding: 0;
+        text-align: left;
+        padding-top: 7px;
+        text-transform: uppercase; }
+        #header #navigation .main-nav ul li {
+          float: left;
+          margin-right: 0;
+          padding: 0;
+          list-style-type: none;
+          list-style-image: none;
+          margin-left: 18px; }
+          #header #navigation .main-nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 2px solid transparent; }
+            #header #navigation .main-nav ul li a:hover, #header #navigation .main-nav ul li a.active {
+              transition: border 0.2s ease;
+              border-bottom-color: #ccac55; }
+      #header #navigation .main-nav .nav-secondary {
+        font-weight: 500;
+        font-size: 12px;
+        padding-top: 4px; }
+        #header #navigation .main-nav .nav-secondary a {
+          color: #8b939b; }
+          #header #navigation .main-nav .nav-secondary a:hover, #header #navigation .main-nav .nav-secondary a.active {
+            border-bottom-color: #8b939b; }
+    @media (min-width: 480px) {
+      #header #navigation {
+        position: absolute;
+        top: 0;
+        height: 3em;
+        width: 100%; } }
+    @media (max-width: 991px) {
+      #header #navigation .region-navigation {
+        transition: all 0.2s;
+        opacity: 0; }
+      #header #navigation #menuTab {
+        float: right;
+        display: block;
+        transition: all 2s; }
+        #header #navigation #menuTab:active {
+          transform: rotate(180deg); }
+      #header #navigation h1 {
+        float: none; }
+      #header #navigation li {
+        display: none;
+        float: none !important;
+        margin-bottom: 14px; }
+        #header #navigation li.first {
+          margin-top: 20px; }
+      #header #navigation .region-navigation {
+        position: absolute;
+        width: 100%;
+        background-color: #181c1f;
+        opacity: 0; }
+      #header #navigation.responsive .region-navigation {
+        opacity: 1; }
+      #header #navigation.responsive li {
+        display: block; } }
+
+#about {
+  margin-bottom: 100px; }
+
+.launch {
+  margin: 20px;
+  background-color: #eee;
+  box-shadow: 0 0 2px #ccc;
+  border-radius: 5px;
+  width: 100%; }
+  .launch .card-header p {
+    margin-bottom: 0;
+    float: left; }
+  .launch .card-header .launch-patch {
+    float: right;
+    max-height: 100px; }
+  .launch .card-block {
+    padding: 20px 20px 0; }
+  .launch .launch-failure {
+    color: #900; }
+  .launch .launch-success {
+    color: #050; }
+  .launch .accordion .card {
+    margin: auto -20px; }
+  @media (min-width: 992px) {
+    .launch {
+      width: 29%; } }
+
+.chart {
+  width: 100%;
+  min-height: 450px; }
+
+#nextLaunch {
+  margin-top: 100px; }
+  #nextLaunch .launch {
+    width: 100%; }
+  #nextLaunch.hide-details .card-block, #nextLaunch.hide-details .card .card {
+    display: none; }
+  #nextLaunch.hide-details .toggle-header {
+    cursor: pointer; }
+    #nextLaunch.hide-details .toggle-header::after {
+      content: "Display additional info";
+      font-size: 0.8em;
+      margin-left: 20px;
+      color: #444; }
+  #nextLaunch.show-details .toggle-header {
+    cursor: pointer; }
+    #nextLaunch.show-details .toggle-header::after {
+      content: "Hide additional info";
+      font-size: 0.8em;
+      margin-left: 20px;
+      color: #444; }
+
+#launchCountdown {
+  font-size: 0.7em;
+  font-weight: normal;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.5s; }
+
+.scrollToTop {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px;
+  text-align: center;
+  background: whiteSmoke;
+  font-weight: bold;
+  color: #444;
+  text-decoration: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display: none;
+  background: #ddd; }
+  .scrollToTop svg {
+    transition: all 0.3s; }
+  .scrollToTop:hover {
+    text-decoration: none; }
+    .scrollToTop:hover svg {
+      margin-bottom: 2px;
+      transition: all 0.3s; }
