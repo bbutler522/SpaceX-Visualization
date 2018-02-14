@@ -5,8 +5,8 @@ A visualization of SpaceX launches
 http://spacexvisual.com/
 
 ## Technologies
-Build using primarily jQuery to work with JSON data and presenting it in an easy to examine format. 
-An initial chart is generated with Google Charts, though more in depth analyses will be added later(Either in GCharts or D3.js)
+Build using primarily React and jQuery to work with JSON data, presenting it in an easy to examine format. 
+An initial chart is generated with Google Charts, though more in depth analyses will be added later (Either in GCharts or D3.js)
 
 Using Webpack, Babel, and React. Compile SCSS and JS using
 `npm run watch`
