@@ -17961,14 +17961,6 @@ $("#nextLaunch").on("click", ".toggle-header", function () {
 });
 // End show additional next launch info
 
-// Show charts
-$('#showCharts').on('click', function () {
-  $('#chart_div').css('height', 'auto');
-  $('#chart_div').css('opacity', '1');
-  $(this).hide();
-});
-// End Show Charts
-
 // Make unpretty JSON readable
 // Remove underscore and make title case
 function toTitleCase(str) {
