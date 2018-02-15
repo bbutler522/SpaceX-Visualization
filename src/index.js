@@ -52,7 +52,7 @@ export default class PreviousLaunches extends React.Component {
   render() {
     Moment.locale('en');
     const launches = this.state.launch.reverse().map((item, i) => (
-      <div data-launch={item.flight_number} className='launch card'>
+      <div className='launch card'>
         <div className='card-header'>
           <p><strong>Flight #:</strong> { item.flight_number }</p>
           {item.links.mission_patch !== null ? <img className='launch-patch img-fluid' src={item.links.mission_patch} /> : false}
