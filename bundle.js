@@ -70,10 +70,6 @@
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(6);
@@ -389,15 +385,293 @@ var PreviousLaunches = function (_React$Component) {
   return PreviousLaunches;
 }(_react2.default.Component);
 
-exports.default = PreviousLaunches;
-
-
 _reactDom2.default.render(_react2.default.createElement(PreviousLaunches, null), document.getElementById('previousLaunches'));
 
+var UpcomingLaunches = function (_React$Component2) {
+  _inherits(UpcomingLaunches, _React$Component2);
+
+  function UpcomingLaunches(props) {
+    _classCallCheck(this, UpcomingLaunches);
+
+    var _this3 = _possibleConstructorReturn(this, (UpcomingLaunches.__proto__ || Object.getPrototypeOf(UpcomingLaunches)).call(this, props));
+
+    _this3.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this3.handleClick = _this3.handleClick.bind(_this3);
+    return _this3;
+  }
+
+  _createClass(UpcomingLaunches, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.UpcomingLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: 'UpcomingLaunches',
+    value: function UpcomingLaunches() {
+      var _this4 = this;
+
+      fetch("https://api.spacexdata.com/v2/launches/upcoming").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this4.setState({ launch: json.reverse() });
+      });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      _moment2.default.locale('en');
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'launch card' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header' },
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Flight #:'
+              ),
+              ' ',
+              item.flight_number
+            ),
+            item.links.mission_patch !== null ? _react2.default.createElement('img', { className: 'launch-patch img-fluid', src: item.links.mission_patch }) : false
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(
+              'p',
+              { className: 'date' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Date:'
+              ),
+              ' ',
+              (0, _moment2.default)(item.launch_date_unix * 1000).format('MM/DD/YYYY')
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Rocket Name:'
+              ),
+              ' ',
+              item.rocket.rocket_name
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Rocket Type:'
+              ),
+              ' ',
+              item.rocket.rocket_type
+            ),
+            item.launch_success !== null ? item.launch_success === true ? _react2.default.createElement(
+              'p',
+              { className: 'launch-success' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Successful'
+              )
+            ) : _react2.default.createElement(
+              'p',
+              { className: 'launch-failure' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Failure'
+              )
+            ) : false,
+            item.rocket.first_stage.cores[0].land_success === true ? _react2.default.createElement(
+              'p',
+              { className: 'text-info' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Landing Successful'
+              )
+            ) : false,
+            $.map(item.reuse, function (type, index) {
+              return type === true ? _react2.default.createElement(
+                'p',
+                { className: 'text-info' },
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Reused ',
+                  toTitleCase(index)
+                )
+              ) : false;
+            }),
+            item.telemetry.flight_club !== null ? _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'a',
+                { href: item.telemetry.flight_club, target: '_blank' },
+                'Telemetry'
+              )
+            ) : false,
+            _react2.default.createElement(
+              'div',
+              { className: 'accordion', id: "accordion" + item.flight_number, role: 'tablist', 'aria-multiselectable': 'true' },
+              item.details !== null ? _react2.default.createElement(
+                'div',
+                { className: 'card border-left-0 border-right-0  border-left-0 border-bottom-0' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-header', role: 'tab', id: "headingOne" + item.flight_number },
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(
+                      'a',
+                      { 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseOne" + item.flight_number, 'aria-expanded': 'true', 'aria-controls': "collapseOne" + item.flight_number },
+                      'Details'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { id: "collapseOne" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingOne" + item.flight_number },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'card-block' },
+                    item.details
+                  )
+                )
+              ) : false,
+              _react2.default.createElement(
+                'div',
+                { className: 'card border-left-0 border-right-0 border-bottom-0' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-header', role: 'tab', id: "headingThree" + item.flight_number },
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(
+                      'a',
+                      { className: 'collapsed', 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseThree" + item.flight_number, 'aria-expanded': 'false', 'aria-controls': "collapseThree" + item.flight_number },
+                      'Payload'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { id: "collapseThree" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingThree" + item.flight_number },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'card-block' },
+                    item.rocket.second_stage.payloads.map(function (payloads, index) {
+                      return payloads.payload_id !== null ? _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'ID:'
+                          ),
+                          ' ',
+                          payloads.payload_id
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'Type:'
+                          ),
+                          ' ',
+                          payloads.payload_type
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'Customers:'
+                          )
+                        ),
+                        payloads.customers.map(function (customers, index) {
+                          return customers !== null ? _react2.default.createElement(
+                            'div',
+                            null,
+                            customers,
+                            _react2.default.createElement('br', null)
+                          ) : false;
+                        }),
+                        _react2.default.createElement('hr', null)
+                      ) : false;
+                    })
+                  )
+                )
+              )
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        'div',
+        { id: 'layout-content', className: 'layout-content-wrapper' },
+        _react2.default.createElement(
+          'button',
+          { className: 'btn btn-info', onClick: this.handleClick },
+          'Show ',
+          this.state.reversed ? 'lastest' : 'earliest',
+          ' first'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'panel-list row list' },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return UpcomingLaunches;
+}(_react2.default.Component);
+
+_reactDom2.default.render(_react2.default.createElement(UpcomingLaunches, null), document.getElementById('upcoming'));
+
 // Function to generate launches from JSON input
+/*
 function launchGen(json) {
   var html = "";
-  json.forEach(function (val) {
+  json.forEach(function(val) {
     var num = val.flight_number;
     var patchSrc = val.links.mission_patch;
     // Use a mirror for Imgur since they block some GET requests from codepen
@@ -414,11 +688,17 @@ function launchGen(json) {
     }
     html += "</div>";
     html += "<div class='card-block'>";
-    html += "<p class='date'><strong>Launch Date:</strong> " + launchDate.toLocaleDateString() + "</p>";
-    html += "<p><strong>Rocket Name:</strong> " + val.rocket.rocket_name + "</p>";
-    html += "<p><strong>Rocket Type:</strong> " + val.rocket.rocket_type + "</p>";
+    html +=
+      "<p class='date'><strong>Launch Date:</strong> " +
+      launchDate.toLocaleDateString() +
+      "</p>";
+    html +=
+      "<p><strong>Rocket Name:</strong> " + val.rocket.rocket_name + "</p>";
+    html +=
+      "<p><strong>Rocket Type:</strong> " + val.rocket.rocket_type + "</p>";
     if (val.launch_success === true) {
-      html += "<p class='launch-success'><strong>Launch Successful</strong></p>";
+      html +=
+        "<p class='launch-success'><strong>Launch Successful</strong></p>";
     } else if (val.launch_success !== null) {
       html += "<p class='launch-failure'><strong>Launch Failure</strong></p>";
     }
@@ -426,47 +706,78 @@ function launchGen(json) {
       html += '<p class="text-info"><strong>Landing Successful</strong></p>';
     }
     var reuse = val.reuse;
-    $.each(reuse, function (key, value) {
+    $.each(reuse, function(key, value) {
       if (value === true) {
         key = toTitleCase(key);
         html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
       }
     });
     if (val.telemetry.flight_club !== null) {
-      html += '<p><a href="' + val.telemetry.flight_club + '" target="_blank">Telemetry</a></p>';
+      html +=
+        '<p><a href="' +
+        val.telemetry.flight_club +
+        '" target="_blank">Telemetry</a></p>';
     }
 
     /* Accordion for Details and Payload */
-    html += '<div class="accordion" id="accordion' + num + '" role="tablist" aria-multiselectable="true">';
-    if (val.details !== null) {
-      html += '<div class="card border-left-0 border-right-0  border-left-0 border-bottom-0"><div class="card-header" role="tab" id="headingOne' + num + '"><h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion' + num + '" href="#collapseOne' + num + '" aria-expanded="true" aria-controls="collapseOne' + num + '">Details</a></h5></div><div id="collapseOne' + num + '" class="collapse" role="tabpanel" aria-labelledby="headingOne' + num + '"><div class="card-block">' + val.details + "</div>";
-    }
-
-    html += '</div></div><div class="card border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' + num + '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' + num + '" href="#collapseThree' + num + '" aria-expanded="false" aria-controls="collapseThree' + num + '">Payload</a></h5></div><div id="collapseThree' + num + '" class="collapse" role="tabpanel" aria-labelledby="headingThree' + num + '"><div class="card-block">';
-    // For each payload do
-    var payload = val.rocket.second_stage.payloads;
-    for (var i = 0; i < payload.length; i++) {
-      html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
-      html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
-
-      html += "<p><strong>Customers:</strong> ";
-      // Get the customers
-      for (var j = 0; j < payload[i].customers.length; j++) {
-        html += "<br/>" + payload[i].customers[j];
-      }
-      html += "<hr/>";
-    }
-
-    html += "</div></div></div>";
-    html += "</div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
+/*
+html +=
+  '<div class="accordion" id="accordion' +
+  num +
+  '" role="tablist" aria-multiselectable="true">';
+if (val.details !== null) {
+  html +=
+    '<div class="card border-left-0 border-right-0  border-left-0 border-bottom-0"><div class="card-header" role="tab" id="headingOne' +
+    num +
+    '"><h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion' +
+    num +
+    '" href="#collapseOne' +
+    num +
+    '" aria-expanded="true" aria-controls="collapseOne' +
+    num +
+    '">Details</a></h5></div><div id="collapseOne' +
+    num +
+    '" class="collapse" role="tabpanel" aria-labelledby="headingOne' +
+    num +
+    '"><div class="card-block">' +
+    val.details +
+    "</div>";
+}
+  html +=
+  '</div></div><div class="card border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
+  num +
+  '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' +
+  num +
+  '" href="#collapseThree' +
+  num +
+  '" aria-expanded="false" aria-controls="collapseThree' +
+  num +
+  '">Payload</a></h5></div><div id="collapseThree' +
+  num +
+  '" class="collapse" role="tabpanel" aria-labelledby="headingThree' +
+  num +
+  '"><div class="card-block">';
+// For each payload do
+var payload = val.rocket.second_stage.payloads;
+for (var i = 0; i < payload.length; i++) {
+  html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
+  html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
+    html += "<p><strong>Customers:</strong> ";
+  // Get the customers
+  for (var j = 0; j < payload[i].customers.length; j++) {
+    html += "<br/>" + payload[i].customers[j];
+  }
+  html += "<hr/>";
+}
+  html += "</div></div></div>";
+html += "</div>";
+  html += "</div>";
+html += "</div>";
+});
+return html;
 }
 // End Launch Gen Function
-
+*/
 // Generate next launch
 function nextLaunchGen(json) {
   var html = "";
@@ -745,13 +1056,7 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function (json) {
 
 // Upcoming Launches
 $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function (json) {
-  var html = "";
 
-  // Create the html for each flight
-  html = launchGen(json);
-
-  // Add the html to the page
-  $("#upcoming").append(html);
   removeLoad("upcomingLoad");
 });
 // End Upcoming Launches
