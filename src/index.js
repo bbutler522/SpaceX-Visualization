@@ -272,121 +272,6 @@ ReactDOM.render(
   document.getElementById('upcoming')
 );
 
-// Function to generate launches from JSON input
-/*
-function launchGen(json) {
-  var html = "";
-  json.forEach(function(val) {
-    var num = val.flight_number;
-    var patchSrc = val.links.mission_patch;
-    // Use a mirror for Imgur since they block some GET requests from codepen
-    if (patchSrc !== null && patchSrc.indexOf("imgur") > -1) {
-      patchSrc = patchSrc.replace("i.imgur.com/", "kageurufu.net/imgur/?");
-    }
-    var launchDate = new Date(val.launch_date_unix * 1000);
-
-    html += "<div data-launch='" + num + "' class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>Flight #:</strong> " + val.flight_number + "</p>";
-    if (patchSrc !== null) {
-      html += "<img class='launch-patch img-fluid' src='" + patchSrc + "' />";
-    }
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html +=
-      "<p class='date'><strong>Launch Date:</strong> " +
-      launchDate.toLocaleDateString() +
-      "</p>";
-    html +=
-      "<p><strong>Rocket Name:</strong> " + val.rocket.rocket_name + "</p>";
-    html +=
-      "<p><strong>Rocket Type:</strong> " + val.rocket.rocket_type + "</p>";
-    if (val.launch_success === true) {
-      html +=
-        "<p class='launch-success'><strong>Launch Successful</strong></p>";
-    } else if (val.launch_success !== null) {
-      html += "<p class='launch-failure'><strong>Launch Failure</strong></p>";
-    }
-    if (val.rocket.first_stage.cores[0].land_success === true) {
-      html += '<p class="text-info"><strong>Landing Successful</strong></p>';
-    }
-    var reuse = val.reuse;
-    $.each(reuse, function(key, value) {
-      if (value === true) {
-        key = toTitleCase(key);
-        html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
-      }
-    });
-    if (val.telemetry.flight_club !== null) {
-      html +=
-        '<p><a href="' +
-        val.telemetry.flight_club +
-        '" target="_blank">Telemetry</a></p>';
-    }
-
-    /* Accordion for Details and Payload */
-    /*
-    html +=
-      '<div class="accordion" id="accordion' +
-      num +
-      '" role="tablist" aria-multiselectable="true">';
-    if (val.details !== null) {
-      html +=
-        '<div class="card border-left-0 border-right-0  border-left-0 border-bottom-0"><div class="card-header" role="tab" id="headingOne' +
-        num +
-        '"><h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion' +
-        num +
-        '" href="#collapseOne' +
-        num +
-        '" aria-expanded="true" aria-controls="collapseOne' +
-        num +
-        '">Details</a></h5></div><div id="collapseOne' +
-        num +
-        '" class="collapse" role="tabpanel" aria-labelledby="headingOne' +
-        num +
-        '"><div class="card-block">' +
-        val.details +
-        "</div>";
-    }
-
-    html +=
-      '</div></div><div class="card border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
-      num +
-      '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' +
-      num +
-      '" href="#collapseThree' +
-      num +
-      '" aria-expanded="false" aria-controls="collapseThree' +
-      num +
-      '">Payload</a></h5></div><div id="collapseThree' +
-      num +
-      '" class="collapse" role="tabpanel" aria-labelledby="headingThree' +
-      num +
-      '"><div class="card-block">';
-    // For each payload do
-    var payload = val.rocket.second_stage.payloads;
-    for (var i = 0; i < payload.length; i++) {
-      html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
-      html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
-
-      html += "<p><strong>Customers:</strong> ";
-      // Get the customers
-      for (var j = 0; j < payload[i].customers.length; j++) {
-        html += "<br/>" + payload[i].customers[j];
-      }
-      html += "<hr/>";
-    }
-
-    html += "</div></div></div>";
-    html += "</div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End Launch Gen Function
-*/
 // Generate next launch
 function nextLaunchGen(json) {
   var html = "";
@@ -475,26 +360,60 @@ function nextLaunchGen(json) {
 }
 
 // Generate company info
-function companyGen(json) {
-  var html = "";
-  html += '<p><strong>Company: </strong>'+json.name+'</p>';
-  html += '<p><strong>Founder: </strong>'+json.founder+'</p>';
-  html += '<p><strong>Founded: </strong>'+json.founded+'</p>';
-  html += '<p><strong>Employees: </strong>'+json.employees+'</p>';
-  html += '<p><strong>Vehicles: </strong>'+json.vehicles+'</p>';
-  html += '<p><strong>Launch Sites: </strong>'+json.launch_sites+'</p>';
-  html += '<p><strong>Test Sites: </strong>'+json.test_sites+'</p>';
-  html += '<p><strong>CEO: </strong>'+json.ceo+'</p>';
-  html += '<p><strong>CTO: </strong>'+json.cto+'</p>';
-  html += '<p><strong>COO: </strong>'+json.coo+'</p>';
-  html += '<p><strong>CTO Propulsion: </strong>'+json.cto_propulsion+'</p>';
-  html += '<p><strong>Valuation: </strong>$'+json.valuation.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'</p>';
-  html += '<p><strong>Headquarters: </strong>'+json.headquarters.address+', '+json.headquarters.city+', '+json.headquarters.state+'</p>';
-  html += '<p><strong>Summary: </strong>'+json.summary+'</p>';
+class CompanyInfo extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return html;
+    this.state = {
+      company: []
+    };
+  }
+
+  componentDidMount() {
+    this.CompanyInfo();
+  }
+
+  // Get the JSON
+  CompanyInfo() {
+      fetch("https://api.spacexdata.com/v2/info")
+      .then(response => response.json())
+      .then(json =>{
+         this.setState({ company: json })
+      });
+  }
+
+  render() {
+    Moment.locale('en');
+    const company = (
+      <div>
+        <p><strong>Company: </strong> {this.state.company.name}</p>
+        <p><strong>Founder: </strong> {this.state.company.founder}</p>
+        <p><strong>Founded: </strong> {this.state.company.founded}</p>
+        <p><strong>Employees: </strong> {this.state.company.employees}</p>
+        <p><strong>CEO: </strong> {this.state.company.ceo}</p>
+        <p><strong>CTO: </strong> {this.state.company.cto}</p>
+        <p><strong>COO: </strong> {this.state.company.coo}</p>
+        <p><strong>CTO Propulsion: </strong> {this.state.company.cto_propulsion}</p>
+        <p><strong>Valuation: </strong> {this.state.company.valuation}</p>
+        <p><strong>Summary: </strong> {this.state.company.summary}</p>
+      </div>
+
+    );
+
+    return (
+      <div id="layout-content" className="layout-content-wrapper row">
+        <div className="panel-list col-12 list">{ company }</div>
+      </div>
+    );
+  }
 }
-// End company info gen
+
+
+ReactDOM.render(
+  <CompanyInfo />,
+  document.getElementById('company')
+);
+
 
 // Function to generate rockets
 function rocketsGen(json) {
@@ -726,13 +645,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
 
 // Company Info
 $.getJSON("https://api.spacexdata.com/v2/info", function(json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = companyGen(json);
-
-  // Add the html to the page
-  $("#company").append(html);
   removeLoad("companyLoad");
 });
 // End Company Info
