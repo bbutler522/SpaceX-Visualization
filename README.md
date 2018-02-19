@@ -9,9 +9,12 @@ Build using primarily React and jQuery to work with JSON data, presenting it in 
 An initial chart is generated with Google Charts, though more in depth analyses will be added later (Either in GCharts or D3.js)
 
 Using Webpack, Babel, and React. Compile SCSS and JS using
+
 `npm run watch`
 
-Install locally with `npm install`
+Install locally with 
+
+`npm install`
 
 ## SpaceX
 Find out more about SpaceX on their site at http://www.spacex.com/
