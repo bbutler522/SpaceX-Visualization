@@ -6,6 +6,13 @@ import {
 } from "react-router-dom";
 import Home from "./Home";
 import Charts from "./Charts";
+import Previous from "./Previous";
+import Upcoming from "./Upcoming";
+import Company from "./Company";
+import Rockets from "./Rockets";
+import Capsules from "./Capsules";
+import Launchpads from "./Launchpads";
+import About from "./About";
 
 class Main extends Component {
   render() {
@@ -23,11 +30,11 @@ class Main extends Component {
                       <li><NavLink to="/upcoming" className="menu__link">Upcoming Launches</NavLink></li>
                     </ul>
                     <ul class="menu nav-list nav-secondary">
-                      <li><a href="#company">Company</a></li>
-                      <li><a href="#rockets">Rockets</a></li>
-                      <li><a href="#capsules">Capsules</a></li>
-                      <li><a href="#launchpads">Launchpads</a></li>
-                      <li><a href="#about">About</a></li>
+                      <li><NavLink to="/company">Company</NavLink></li>
+                      <li><NavLink to="/rockets">Rockets</NavLink></li>
+                      <li><NavLink to="/capsules">Capsules</NavLink></li>
+                      <li><NavLink to="/launchpads">Launchpads</NavLink></li>
+                      <li><NavLink to="/about">About</NavLink></li>
                     </ul>
                   </div>
                   <a id="menuTab"><i class="fas fa-bars fa-2x"></i></a>
@@ -41,13 +48,13 @@ class Main extends Component {
                 <div className="content">
                   <br/><br/><br/><br/>
                   <Route exact path="/" component={Home}/>
-                  {/*<Route path="/previous" component={Previous}/>
+                  <Route path="/previous" component={Previous}/>
                   <Route path="/upcoming" component={Upcoming}/>
                   <Route path="/company" component={Company}/>
                   <Route path="/rockets" component={Rockets}/>
                   <Route path="/capsules" component={Capsules}/>
                   <Route path="/launchpads" component={Launchpads}/>
-                  <Route path="/about" component={About}/>*/}
+                  <Route path="/about" component={About}/>
                 </div>
               </div>
             </div>
