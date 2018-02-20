@@ -35893,8 +35893,8 @@ var Main = function (_Component) {
                   "nav",
                   { "class": "main-nav" },
                   _react2.default.createElement(
-                    "a",
-                    { href: "#" },
+                    _reactRouterDom.NavLink,
+                    { to: "/" },
                     _react2.default.createElement(
                       "h1",
                       null,
@@ -35906,35 +35906,13 @@ var Main = function (_Component) {
                     { "class": "region region-navigation" },
                     _react2.default.createElement(
                       "ul",
-                      { className: "header" },
-                      _react2.default.createElement(
-                        "li",
-                        null,
-                        _react2.default.createElement(
-                          _reactRouterDom.NavLink,
-                          { to: "/" },
-                          "Home"
-                        )
-                      ),
-                      _react2.default.createElement(
-                        "li",
-                        null,
-                        _react2.default.createElement(
-                          _reactRouterDom.NavLink,
-                          { to: "/charts" },
-                          "Charts"
-                        )
-                      )
-                    ),
-                    _react2.default.createElement(
-                      "ul",
                       { className: "menu nav-list nav-primary" },
                       _react2.default.createElement(
                         "li",
-                        { "class": "first" },
+                        null,
                         _react2.default.createElement(
-                          "a",
-                          { href: "#previousLaunches", "class": "menu__link" },
+                          _reactRouterDom.NavLink,
+                          { to: "/previous", className: "menu__link" },
                           "Previous Launches"
                         )
                       ),
@@ -35942,9 +35920,58 @@ var Main = function (_Component) {
                         "li",
                         null,
                         _react2.default.createElement(
-                          "a",
-                          { href: "#upcoming" },
+                          _reactRouterDom.NavLink,
+                          { to: "/upcoming", className: "menu__link" },
                           "Upcoming Launches"
+                        )
+                      )
+                    ),
+                    _react2.default.createElement(
+                      "ul",
+                      { "class": "menu nav-list nav-secondary" },
+                      _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                          "a",
+                          { href: "#company" },
+                          "Company"
+                        )
+                      ),
+                      _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                          "a",
+                          { href: "#rockets" },
+                          "Rockets"
+                        )
+                      ),
+                      _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                          "a",
+                          { href: "#capsules" },
+                          "Capsules"
+                        )
+                      ),
+                      _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                          "a",
+                          { href: "#launchpads" },
+                          "Launchpads"
+                        )
+                      ),
+                      _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                          "a",
+                          { href: "#about" },
+                          "About"
                         )
                       )
                     )
@@ -35970,8 +35997,11 @@ var Main = function (_Component) {
                 _react2.default.createElement(
                   "div",
                   { className: "content" },
-                  _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Home2.default }),
-                  _react2.default.createElement(_reactRouterDom.Route, { path: "/charts", component: _Charts2.default })
+                  _react2.default.createElement("br", null),
+                  _react2.default.createElement("br", null),
+                  _react2.default.createElement("br", null),
+                  _react2.default.createElement("br", null),
+                  _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Home2.default })
                 )
               )
             )

@@ -16,15 +16,18 @@ class Main extends Component {
             <div class="header-inner container">
               <div id="navigation">
                 <nav class="main-nav">
-                  <a href="#"><h1>SpaceX Visual</h1></a>
+                  <NavLink to="/"><h1>SpaceX Visual</h1></NavLink>
                   <div class="region region-navigation">
-                    <ul className="header">
-                      <li><NavLink to="/">Home</NavLink></li>
-                      <li><NavLink to="/charts">Charts</NavLink></li>
-                    </ul>
                     <ul className="menu nav-list nav-primary">
-                      <li class="first"><a href="#previousLaunches" class="menu__link">Previous Launches</a></li>
-                      <li><a href="#upcoming">Upcoming Launches</a></li>
+                      <li><NavLink to="/previous" className="menu__link">Previous Launches</NavLink></li>
+                      <li><NavLink to="/upcoming" className="menu__link">Upcoming Launches</NavLink></li>
+                    </ul>
+                    <ul class="menu nav-list nav-secondary">
+                      <li><a href="#company">Company</a></li>
+                      <li><a href="#rockets">Rockets</a></li>
+                      <li><a href="#capsules">Capsules</a></li>
+                      <li><a href="#launchpads">Launchpads</a></li>
+                      <li><a href="#about">About</a></li>
                     </ul>
                   </div>
                   <a id="menuTab"><i class="fas fa-bars fa-2x"></i></a>
@@ -36,8 +39,15 @@ class Main extends Component {
             <div class="row">
               <div class="col-sm-12">
                 <div className="content">
+                  <br/><br/><br/><br/>
                   <Route exact path="/" component={Home}/>
-                  <Route path="/charts" component={Charts}/>
+                  {/*<Route path="/previous" component={Previous}/>
+                  <Route path="/upcoming" component={Upcoming}/>
+                  <Route path="/company" component={Company}/>
+                  <Route path="/rockets" component={Rockets}/>
+                  <Route path="/capsules" component={Capsules}/>
+                  <Route path="/launchpads" component={Launchpads}/>
+                  <Route path="/about" component={About}/>*/}
                 </div>
               </div>
             </div>
