@@ -17186,301 +17186,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 _reactDom2.default.render(_react2.default.createElement(_Main2.default, null), document.getElementById("app"));
 
-var PreviousLaunches = function (_React$Component) {
-  _inherits(PreviousLaunches, _React$Component);
+/*
+ReactDOM.render(
+  <PreviousLaunches />,
+  document.getElementById('previousLaunches')
+);
+*/
 
-  function PreviousLaunches(props) {
-    _classCallCheck(this, PreviousLaunches);
-
-    var _this = _possibleConstructorReturn(this, (PreviousLaunches.__proto__ || Object.getPrototypeOf(PreviousLaunches)).call(this, props));
-
-    _this.state = {
-      launch: [],
-      reversed: false
-    };
-
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
-  }
-
-  _createClass(PreviousLaunches, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.PreviousLaunches();
-    }
-
-    // Get the JSON
-
-  }, {
-    key: 'PreviousLaunches',
-    value: function PreviousLaunches() {
-      var _this2 = this;
-
-      fetch("https://api.spacexdata.com/v2/launches").then(function (response) {
-        return response.json();
-      }).then(function (json) {
-        _this2.setState({ launch: json });
-      });
-    }
-  }, {
-    key: 'handleClick',
-    value: function handleClick() {
-      // Because we reverse the launch array on render, pass the current launch array
-      var reverseLaunches = this.state.launch;
-      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
-      console.log(this.state);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      _moment2.default.locale('en');
-      var launches = this.state.launch.reverse().map(function (item, i) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'launch card' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Flight #:'
-              ),
-              ' ',
-              item.flight_number
-            ),
-            item.links.mission_patch !== null ? _react2.default.createElement('img', { className: 'launch-patch img-fluid', src: item.links.mission_patch }) : false
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-block' },
-            _react2.default.createElement(
-              'p',
-              { className: 'date' },
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Launch Date:'
-              ),
-              ' ',
-              (0, _moment2.default)(item.launch_date_unix * 1000).format('MM/DD/YYYY')
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Rocket Name:'
-              ),
-              ' ',
-              item.rocket.rocket_name
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Rocket Type:'
-              ),
-              ' ',
-              item.rocket.rocket_type
-            ),
-            item.launch_success !== null ? item.launch_success === true ? _react2.default.createElement(
-              'p',
-              { className: 'launch-success' },
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Launch Successful'
-              )
-            ) : _react2.default.createElement(
-              'p',
-              { className: 'launch-failure' },
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Launch Failure'
-              )
-            ) : false,
-            item.rocket.first_stage.cores[0].land_success === true ? _react2.default.createElement(
-              'p',
-              { className: 'text-info' },
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Landing Successful'
-              )
-            ) : false,
-            $.map(item.reuse, function (type, index) {
-              return type === true ? _react2.default.createElement(
-                'p',
-                { className: 'text-info' },
-                _react2.default.createElement(
-                  'strong',
-                  null,
-                  'Reused ',
-                  toTitleCase(index)
-                )
-              ) : false;
-            }),
-            item.telemetry.flight_club !== null ? _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                'a',
-                { href: item.telemetry.flight_club, target: '_blank' },
-                'Telemetry'
-              )
-            ) : false,
-            _react2.default.createElement(
-              'div',
-              { className: 'accordion', id: "accordion" + item.flight_number, role: 'tablist', 'aria-multiselectable': 'true' },
-              item.details !== null ? _react2.default.createElement(
-                'div',
-                { className: 'card border-left-0 border-right-0  border-left-0 border-bottom-0' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'card-header', role: 'tab', id: "headingOne" + item.flight_number },
-                  _react2.default.createElement(
-                    'h5',
-                    { className: 'mb-0' },
-                    _react2.default.createElement(
-                      'a',
-                      { 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseOne" + item.flight_number, 'aria-expanded': 'true', 'aria-controls': "collapseOne" + item.flight_number },
-                      'Details'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { id: "collapseOne" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingOne" + item.flight_number },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'card-block' },
-                    item.details
-                  )
-                )
-              ) : false,
-              _react2.default.createElement(
-                'div',
-                { className: 'card border-left-0 border-right-0 border-bottom-0' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'card-header', role: 'tab', id: "headingThree" + item.flight_number },
-                  _react2.default.createElement(
-                    'h5',
-                    { className: 'mb-0' },
-                    _react2.default.createElement(
-                      'a',
-                      { className: 'collapsed', 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseThree" + item.flight_number, 'aria-expanded': 'false', 'aria-controls': "collapseThree" + item.flight_number },
-                      'Payload'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { id: "collapseThree" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingThree" + item.flight_number },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'card-block' },
-                    item.rocket.second_stage.payloads.map(function (payloads, index) {
-                      return payloads.payload_id !== null ? _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                          'p',
-                          null,
-                          _react2.default.createElement(
-                            'strong',
-                            null,
-                            'ID:'
-                          ),
-                          ' ',
-                          payloads.payload_id
-                        ),
-                        _react2.default.createElement(
-                          'p',
-                          null,
-                          _react2.default.createElement(
-                            'strong',
-                            null,
-                            'Type:'
-                          ),
-                          ' ',
-                          payloads.payload_type
-                        ),
-                        _react2.default.createElement(
-                          'p',
-                          null,
-                          _react2.default.createElement(
-                            'strong',
-                            null,
-                            'Customers:'
-                          )
-                        ),
-                        payloads.customers.map(function (customers, index) {
-                          return customers !== null ? _react2.default.createElement(
-                            'div',
-                            null,
-                            customers,
-                            _react2.default.createElement('br', null)
-                          ) : false;
-                        }),
-                        _react2.default.createElement('hr', null)
-                      ) : false;
-                    })
-                  )
-                )
-              )
-            )
-          )
-        );
-      });
-
-      return _react2.default.createElement(
-        'div',
-        { id: 'layout-content', className: 'layout-content-wrapper' },
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-info', onClick: this.handleClick },
-          'Show ',
-          this.state.reversed ? 'lastest' : 'earliest',
-          ' first'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'panel-list row list' },
-          launches
-        )
-      );
-    }
-  }]);
-
-  return PreviousLaunches;
-}(_react2.default.Component);
-
-_reactDom2.default.render(_react2.default.createElement(PreviousLaunches, null), document.getElementById('previousLaunches'));
-
-var UpcomingLaunches = function (_React$Component2) {
-  _inherits(UpcomingLaunches, _React$Component2);
+var UpcomingLaunches = function (_React$Component) {
+  _inherits(UpcomingLaunches, _React$Component);
 
   function UpcomingLaunches(props) {
     _classCallCheck(this, UpcomingLaunches);
 
-    var _this3 = _possibleConstructorReturn(this, (UpcomingLaunches.__proto__ || Object.getPrototypeOf(UpcomingLaunches)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (UpcomingLaunches.__proto__ || Object.getPrototypeOf(UpcomingLaunches)).call(this, props));
 
-    _this3.state = {
+    _this.state = {
       launch: [],
       reversed: true
     };
 
-    _this3.handleClick = _this3.handleClick.bind(_this3);
-    return _this3;
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
   }
 
   _createClass(UpcomingLaunches, [{
@@ -17494,12 +17221,12 @@ var UpcomingLaunches = function (_React$Component2) {
   }, {
     key: 'UpcomingLaunches',
     value: function UpcomingLaunches() {
-      var _this4 = this;
+      var _this2 = this;
 
       fetch("https://api.spacexdata.com/v2/launches/upcoming").then(function (response) {
         return response.json();
       }).then(function (json) {
-        _this4.setState({ launch: json.reverse() });
+        _this2.setState({ launch: json.reverse() });
       });
     }
   }, {
@@ -17744,9 +17471,16 @@ var UpcomingLaunches = function (_React$Component2) {
   return UpcomingLaunches;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(UpcomingLaunches, null), document.getElementById('upcoming'));
+/*
+ReactDOM.render(
+  <UpcomingLaunches />,
+  document.getElementById('upcoming')
+);
+*/
 
 // Generate next launch
+
+
 function nextLaunchGen(json) {
   var html = "";
   var val = json[0];
@@ -41294,6 +41028,12 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _helpers = __webpack_require__(208);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41312,26 +41052,17 @@ var Previous = function (_Component) {
   }
 
   _createClass(Previous, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
         _react2.default.createElement(
-          "h2",
+          'h2',
           null,
-          "Previous"
+          'Previous Launches'
         ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Cras facilisis urna ornare ex volutpat, et convallis erat elementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec massa. Maecenas hendrerit laoreet augue nec molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-        ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Duis a turpis sed lacus dapibus elementum sed eu lectus."
-        )
+        _react2.default.createElement(PreviousLaunches, null)
       );
     }
   }]);
@@ -41340,6 +41071,284 @@ var Previous = function (_Component) {
 }(_react.Component);
 
 exports.default = Previous;
+
+var PreviousLaunches = function (_Component2) {
+  _inherits(PreviousLaunches, _Component2);
+
+  function PreviousLaunches(props) {
+    _classCallCheck(this, PreviousLaunches);
+
+    var _this2 = _possibleConstructorReturn(this, (PreviousLaunches.__proto__ || Object.getPrototypeOf(PreviousLaunches)).call(this, props));
+
+    _this2.state = {
+      launch: [],
+      reversed: false
+    };
+
+    _this2.handleClick = _this2.handleClick.bind(_this2);
+    return _this2;
+  }
+
+  _createClass(PreviousLaunches, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.PreviousLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: 'PreviousLaunches',
+    value: function PreviousLaunches() {
+      var _this3 = this;
+
+      fetch("https://api.spacexdata.com/v2/launches").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this3.setState({ launch: json });
+      });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      _moment2.default.locale('en');
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'launch card' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header' },
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Flight #:'
+              ),
+              ' ',
+              item.flight_number
+            ),
+            item.links.mission_patch !== null ? _react2.default.createElement('img', { className: 'launch-patch img-fluid', src: item.links.mission_patch }) : false
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(
+              'p',
+              { className: 'date' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Date:'
+              ),
+              ' ',
+              (0, _moment2.default)(item.launch_date_unix * 1000).format('MM/DD/YYYY')
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Rocket Name:'
+              ),
+              ' ',
+              item.rocket.rocket_name
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Rocket Type:'
+              ),
+              ' ',
+              item.rocket.rocket_type
+            ),
+            item.launch_success !== null ? item.launch_success === true ? _react2.default.createElement(
+              'p',
+              { className: 'launch-success' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Successful'
+              )
+            ) : _react2.default.createElement(
+              'p',
+              { className: 'launch-failure' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Failure'
+              )
+            ) : false,
+            item.rocket.first_stage.cores[0].land_success === true ? _react2.default.createElement(
+              'p',
+              { className: 'text-info' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Landing Successful'
+              )
+            ) : false,
+            $.map(item.reuse, function (type, index) {
+              return type === true ? _react2.default.createElement(
+                'p',
+                { className: 'text-info' },
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Reused ',
+                  (0, _helpers.toTitleCase)(index)
+                )
+              ) : false;
+            }),
+            item.telemetry.flight_club !== null ? _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'a',
+                { href: item.telemetry.flight_club, target: '_blank' },
+                'Telemetry'
+              )
+            ) : false,
+            _react2.default.createElement(
+              'div',
+              { className: 'accordion', id: "accordion" + item.flight_number, role: 'tablist', 'aria-multiselectable': 'true' },
+              item.details !== null ? _react2.default.createElement(
+                'div',
+                { className: 'card border-left-0 border-right-0  border-left-0 border-bottom-0' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-header', role: 'tab', id: "headingOne" + item.flight_number },
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(
+                      'a',
+                      { 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseOne" + item.flight_number, 'aria-expanded': 'true', 'aria-controls': "collapseOne" + item.flight_number },
+                      'Details'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { id: "collapseOne" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingOne" + item.flight_number },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'card-block' },
+                    item.details
+                  )
+                )
+              ) : false,
+              _react2.default.createElement(
+                'div',
+                { className: 'card border-left-0 border-right-0 border-bottom-0' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-header', role: 'tab', id: "headingThree" + item.flight_number },
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(
+                      'a',
+                      { className: 'collapsed', 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseThree" + item.flight_number, 'aria-expanded': 'false', 'aria-controls': "collapseThree" + item.flight_number },
+                      'Payload'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { id: "collapseThree" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingThree" + item.flight_number },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'card-block' },
+                    item.rocket.second_stage.payloads.map(function (payloads, index) {
+                      return payloads.payload_id !== null ? _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'ID:'
+                          ),
+                          ' ',
+                          payloads.payload_id
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'Type:'
+                          ),
+                          ' ',
+                          payloads.payload_type
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'Customers:'
+                          )
+                        ),
+                        payloads.customers.map(function (customers, index) {
+                          return customers !== null ? _react2.default.createElement(
+                            'div',
+                            null,
+                            customers,
+                            _react2.default.createElement('br', null)
+                          ) : false;
+                        }),
+                        _react2.default.createElement('hr', null)
+                      ) : false;
+                    })
+                  )
+                )
+              )
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        'div',
+        { id: 'layout-content', className: 'layout-content-wrapper' },
+        _react2.default.createElement(
+          'button',
+          { className: 'btn btn-info', onClick: this.handleClick },
+          'Show ',
+          this.state.reversed ? 'lastest' : 'earliest',
+          ' first'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'panel-list row list' },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return PreviousLaunches;
+}(_react.Component);
 
 /***/ }),
 /* 202 */
@@ -41357,6 +41366,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _helpers = __webpack_require__(208);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41376,26 +41391,17 @@ var Upcoming = function (_Component) {
   }
 
   _createClass(Upcoming, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
         _react2.default.createElement(
-          "h2",
+          'h2',
           null,
-          "Upcoming"
+          'Upcoming Launches'
         ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Cras facilisis urna ornare ex volutpat, et convallis erat elementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec massa. Maecenas hendrerit laoreet augue nec molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-        ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Duis a turpis sed lacus dapibus elementum sed eu lectus."
-        )
+        _react2.default.createElement(UpcomingLaunches, null)
       );
     }
   }]);
@@ -41404,6 +41410,284 @@ var Upcoming = function (_Component) {
 }(_react.Component);
 
 exports.default = Upcoming;
+
+var UpcomingLaunches = function (_Component2) {
+  _inherits(UpcomingLaunches, _Component2);
+
+  function UpcomingLaunches(props) {
+    _classCallCheck(this, UpcomingLaunches);
+
+    var _this2 = _possibleConstructorReturn(this, (UpcomingLaunches.__proto__ || Object.getPrototypeOf(UpcomingLaunches)).call(this, props));
+
+    _this2.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this2.handleClick = _this2.handleClick.bind(_this2);
+    return _this2;
+  }
+
+  _createClass(UpcomingLaunches, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.UpcomingLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: 'UpcomingLaunches',
+    value: function UpcomingLaunches() {
+      var _this3 = this;
+
+      fetch("https://api.spacexdata.com/v2/launches/upcoming").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this3.setState({ launch: json.reverse() });
+      });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      _moment2.default.locale('en');
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'launch card' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header' },
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Flight #:'
+              ),
+              ' ',
+              item.flight_number
+            ),
+            item.links.mission_patch !== null ? _react2.default.createElement('img', { className: 'launch-patch img-fluid', src: item.links.mission_patch }) : false
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(
+              'p',
+              { className: 'date' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Date:'
+              ),
+              ' ',
+              (0, _moment2.default)(item.launch_date_unix * 1000).format('MM/DD/YYYY')
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Rocket Name:'
+              ),
+              ' ',
+              item.rocket.rocket_name
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Rocket Type:'
+              ),
+              ' ',
+              item.rocket.rocket_type
+            ),
+            item.launch_success !== null ? item.launch_success === true ? _react2.default.createElement(
+              'p',
+              { className: 'launch-success' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Successful'
+              )
+            ) : _react2.default.createElement(
+              'p',
+              { className: 'launch-failure' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Launch Failure'
+              )
+            ) : false,
+            item.rocket.first_stage.cores[0].land_success === true ? _react2.default.createElement(
+              'p',
+              { className: 'text-info' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Landing Successful'
+              )
+            ) : false,
+            $.map(item.reuse, function (type, index) {
+              return type === true ? _react2.default.createElement(
+                'p',
+                { className: 'text-info' },
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Reused ',
+                  (0, _helpers.toTitleCase)(index)
+                )
+              ) : false;
+            }),
+            item.telemetry.flight_club !== null ? _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'a',
+                { href: item.telemetry.flight_club, target: '_blank' },
+                'Telemetry'
+              )
+            ) : false,
+            _react2.default.createElement(
+              'div',
+              { className: 'accordion', id: "accordion" + item.flight_number, role: 'tablist', 'aria-multiselectable': 'true' },
+              item.details !== null ? _react2.default.createElement(
+                'div',
+                { className: 'card border-left-0 border-right-0  border-left-0 border-bottom-0' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-header', role: 'tab', id: "headingOne" + item.flight_number },
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(
+                      'a',
+                      { 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseOne" + item.flight_number, 'aria-expanded': 'true', 'aria-controls': "collapseOne" + item.flight_number },
+                      'Details'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { id: "collapseOne" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingOne" + item.flight_number },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'card-block' },
+                    item.details
+                  )
+                )
+              ) : false,
+              _react2.default.createElement(
+                'div',
+                { className: 'card border-left-0 border-right-0 border-bottom-0' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-header', role: 'tab', id: "headingThree" + item.flight_number },
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(
+                      'a',
+                      { className: 'collapsed', 'data-toggle': 'collapse', 'data-parent': "#accordion" + item.flight_number, href: "#collapseThree" + item.flight_number, 'aria-expanded': 'false', 'aria-controls': "collapseThree" + item.flight_number },
+                      'Payload'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { id: "collapseThree" + item.flight_number, className: 'collapse', role: 'tabpanel', 'aria-labelledby': "headingThree" + item.flight_number },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'card-block' },
+                    item.rocket.second_stage.payloads.map(function (payloads, index) {
+                      return payloads.payload_id !== null ? _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'ID:'
+                          ),
+                          ' ',
+                          payloads.payload_id
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'Type:'
+                          ),
+                          ' ',
+                          payloads.payload_type
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          _react2.default.createElement(
+                            'strong',
+                            null,
+                            'Customers:'
+                          )
+                        ),
+                        payloads.customers.map(function (customers, index) {
+                          return customers !== null ? _react2.default.createElement(
+                            'div',
+                            null,
+                            customers,
+                            _react2.default.createElement('br', null)
+                          ) : false;
+                        }),
+                        _react2.default.createElement('hr', null)
+                      ) : false;
+                    })
+                  )
+                )
+              )
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        'div',
+        { id: 'layout-content', className: 'layout-content-wrapper' },
+        _react2.default.createElement(
+          'button',
+          { className: 'btn btn-info', onClick: this.handleClick },
+          'Show ',
+          this.state.reversed ? 'lastest' : 'earliest',
+          ' first'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'panel-list row list' },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return UpcomingLaunches;
+}(_react.Component);
 
 /***/ }),
 /* 203 */
@@ -41724,6 +42008,24 @@ var About = function (_Component) {
 }(_react.Component);
 
 exports.default = About;
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.toTitleCase = toTitleCase;
+function toTitleCase(str) {
+  str = str.replace("_", " ");
+  return str.replace(/(?:^|\s)\w/g, function (match) {
+    return match.toUpperCase();
+  });
+}
 
 /***/ })
 /******/ ]);
