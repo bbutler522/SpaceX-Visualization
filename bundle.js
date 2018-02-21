@@ -35345,13 +35345,13 @@ var Main = function (_Component) {
             { id: "header", role: "banner" },
             _react2.default.createElement(
               "div",
-              { "class": "header-inner container" },
+              { className: "header-inner container" },
               _react2.default.createElement(
                 "div",
                 { id: "navigation" },
                 _react2.default.createElement(
                   "nav",
-                  { "class": "main-nav" },
+                  { className: "main-nav" },
                   _react2.default.createElement(
                     _reactRouterDom.NavLink,
                     { to: "/" },
@@ -35363,7 +35363,7 @@ var Main = function (_Component) {
                   ),
                   _react2.default.createElement(
                     "div",
-                    { "class": "region region-navigation" },
+                    { className: "region region-navigation" },
                     _react2.default.createElement(
                       "ul",
                       { className: "menu nav-list nav-primary" },
@@ -35388,7 +35388,7 @@ var Main = function (_Component) {
                     ),
                     _react2.default.createElement(
                       "ul",
-                      { "class": "menu nav-list nav-secondary" },
+                      { className: "menu nav-list nav-secondary" },
                       _react2.default.createElement(
                         "li",
                         null,
@@ -35439,7 +35439,7 @@ var Main = function (_Component) {
                   _react2.default.createElement(
                     "a",
                     { id: "menuTab" },
-                    _react2.default.createElement("i", { "class": "fas fa-bars fa-2x" })
+                    _react2.default.createElement("i", { className: "fas fa-bars fa-2x" })
                   )
                 )
               )
@@ -35447,13 +35447,13 @@ var Main = function (_Component) {
           ),
           _react2.default.createElement(
             "div",
-            { "class": "container content" },
+            { className: "container content" },
             _react2.default.createElement(
               "div",
-              { "class": "row" },
+              { className: "row" },
               _react2.default.createElement(
                 "div",
-                { "class": "col-sm-12" },
+                { className: "col-sm-12" },
                 _react2.default.createElement(
                   "div",
                   { className: "content" },
@@ -40791,6 +40791,7 @@ var PreviousLaunches = function (_Component2) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.PreviousLaunches();
+      window.scrollTo(0, 0);
     }
 
     // Get the JSON
@@ -41130,6 +41131,7 @@ var UpcomingLaunches = function (_Component2) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.UpcomingLaunches();
+      window.scrollTo(0, 0);
     }
 
     // Get the JSON
