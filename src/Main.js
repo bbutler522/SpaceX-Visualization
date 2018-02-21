@@ -20,16 +20,16 @@ class Main extends Component {
       <HashRouter>
         <div>
           <header id="header" role="banner">
-            <div class="header-inner container">
+            <div className="header-inner container">
               <div id="navigation">
-                <nav class="main-nav">
+                <nav className="main-nav">
                   <NavLink to="/"><h1>SpaceX Visual</h1></NavLink>
-                  <div class="region region-navigation">
+                  <div className="region region-navigation">
                     <ul className="menu nav-list nav-primary">
                       <li><NavLink to="/previous" className="menu__link">Previous Launches</NavLink></li>
                       <li><NavLink to="/upcoming" className="menu__link">Upcoming Launches</NavLink></li>
                     </ul>
-                    <ul class="menu nav-list nav-secondary">
+                    <ul className="menu nav-list nav-secondary">
                       <li><NavLink to="/company">Company</NavLink></li>
                       <li><NavLink to="/rockets">Rockets</NavLink></li>
                       <li><NavLink to="/capsules">Capsules</NavLink></li>
@@ -37,14 +37,14 @@ class Main extends Component {
                       <li><NavLink to="/about">About</NavLink></li>
                     </ul>
                   </div>
-                  <a id="menuTab"><i class="fas fa-bars fa-2x"></i></a>
+                  <a id="menuTab"><i className="fas fa-bars fa-2x"></i></a>
                 </nav>
               </div>
             </div>
           </header>
-          <div class="container content">
-            <div class="row">
-              <div class="col-sm-12">
+          <div className="container content">
+            <div className="row">
+              <div className="col-sm-12">
                 <div className="content">
                   <br/><br/><br/><br/>
                   <Route exact path="/" component={Home}/>
