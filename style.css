@@ -135,26 +135,27 @@ body, h1, h2, h3, h4, h5, h6, p {
   width: 100%;
   min-height: 450px; }
 
-#nextLaunch {
-  margin-top: 100px; }
-  #nextLaunch .launch {
-    width: 100%; }
-  #nextLaunch.hide-details .card-block, #nextLaunch.hide-details .card .card {
-    display: none; }
-  #nextLaunch.hide-details .toggle-header {
-    cursor: pointer; }
-    #nextLaunch.hide-details .toggle-header::after {
-      content: "Display additional info";
-      font-size: 0.8em;
-      margin-left: 20px;
-      color: #444; }
-  #nextLaunch.show-details .toggle-header {
-    cursor: pointer; }
-    #nextLaunch.show-details .toggle-header::after {
-      content: "Hide additional info";
-      font-size: 0.8em;
-      margin-left: 20px;
-      color: #444; }
+#nextLaunch .launch {
+  width: 100%; }
+
+#nextLaunch.hide-details .card-block, #nextLaunch.hide-details .card .card {
+  display: none; }
+
+#nextLaunch.hide-details .toggle-header {
+  cursor: pointer; }
+  #nextLaunch.hide-details .toggle-header::after {
+    content: "Display additional info";
+    font-size: 0.8em;
+    margin-left: 20px;
+    color: #444; }
+
+#nextLaunch.show-details .toggle-header {
+  cursor: pointer; }
+  #nextLaunch.show-details .toggle-header::after {
+    content: "Hide additional info";
+    font-size: 0.8em;
+    margin-left: 20px;
+    color: #444; }
 
 #launchCountdown {
   font-size: 0.7em;
