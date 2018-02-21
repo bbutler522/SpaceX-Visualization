@@ -8,94 +8,8 @@ ReactDOM.render(
   document.getElementById("app")
 );
 
-// Generate next launch
-function nextLaunchGen(json) {
-  var html = "";
-  var val = json[0];
-  var num = "Next";
-  var launchDate = new Date(val.launch_date_unix * 1000);
-  html += "<div data-launch='" + num + "' class='launch card'>";
-  html += "<div class='card-header toggle-header'>";
-  html += "<p><strong>Flight #:</strong> " + val.flight_number + "</p>";
-  html += "</div>";
-  html += "<div class='card-block'>";
-  html +=
-    "<p class='date'><strong>Launch Date:</strong> " +
-    launchDate.toLocaleDateString() +
-    "</p>";
-  html += "<p><strong>Rocket Name:</strong> " + val.rocket.rocket_name + "</p>";
-  html += "<p><strong>Rocket Type:</strong> " + val.rocket.rocket_type + "</p>";
-  var reuse = val.reuse;
-  $.each(reuse, function(key, value) {
-    if (value === true) {
-      key = toTitleCase(key);
-      html += '<p class="text-info"><strong>Reused ' + key + "</strong></p>";
-    }
-  });
 
-  /* Accordion for Details and Payload */
-  html +=
-    '<div class="accordion" id="accordion' +
-    num +
-    '" role="tablist" aria-multiselectable="true">';
-  if (val.details !== null) {
-    html +=
-      '<div class="card border-left-0 border-right-0  border-left-0 border-bottom-0"><div class="card-header" role="tab" id="headingOne' +
-      num +
-      '"><h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion' +
-      num +
-      '" href="#collapseOne' +
-      num +
-      '" aria-expanded="true" aria-controls="collapseOne' +
-      num +
-      '">Details</a></h5></div><div id="collapseOne' +
-      num +
-      '" class="collapse " role="tabpanel" aria-labelledby="headingOne' +
-      num +
-      '"><div class="card-block">' +
-      val.details +
-      "</div>";
-  }
-
-  html +=
-    '</div></div><div class="card  border-left-0 border-right-0 border-bottom-0"><div class="card-header" role="tab" id="headingThree' +
-    num +
-    '"><h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion' +
-    num +
-    '" href="#collapseThree' +
-    num +
-    '" aria-expanded="false" aria-controls="collapseThree' +
-    num +
-    '">Payload</a></h5></div><div id="collapseThree' +
-    num +
-    '" class="collapse" role="tabpanel" aria-labelledby="headingThree' +
-    num +
-    '"><div class="card-block">';
-  // For each payload do
-  var payload = val.rocket.second_stage.payloads;
-  for (var i = 0; i < payload.length; i++) {
-    html += "<p><strong>ID:</strong> " + payload[i].payload_id + "</p>";
-    html += "<p><strong>Type:</strong> " + payload[i].payload_type + "</p>";
-
-    html += "<p><strong>Customers:</strong> ";
-    // Get the customers
-    for (var j = 0; j < payload[i].customers.length; j++) {
-      html += "<br/>" + payload[i].customers[j];
-    }
-    html += "<hr/>";
-  }
-
-  html += "</div></div></div>";
-  html += "</div>";
-
-  html += "</div>";
-  html += "</div>";
-  html +=
-    '<p class="col-12">Countdown is based on the initial launch time, which is subject to change.</p><p class="col-12">Stream of launch usually available at <a href="http://www.spacex.com/webcast" target="_blank">http://www.spacex.com/webcast</a></p>';
-  return html;
-}
-
-// Previous Launches
+// Chart JSON
 $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
 
   /* Create an array of the years since the first launch
@@ -157,16 +71,8 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
 });
 // End Previous launches
 
-
 // Next Launch
 $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
-  var html = "";
-  // Create the html for each flight
-  html = nextLaunchGen(json);
-
-  // Add the html to the page
-  $("#nextLaunch").append(html);
-  removeLoad("nextLoad");
 
   // Add countdown until launch
   launchCountdown(json[0].launch_date_unix);
@@ -211,23 +117,6 @@ function launchCountdown(launchTime) {
   }, 1000);
 }
 // End Countdown Function
-
-// Show additional next launch info
-$("#nextLaunch").on("click", ".toggle-header", function() {
-  $("#nextLaunch").toggleClass("hide-details");
-  $("#nextLaunch").toggleClass("show-details");
-});
-// End show additional next launch info
-
-// Make unpretty JSON readable
-// Remove underscore and make title case
-function toTitleCase(str) {
-  str = str.replace("_", " ");
-  return str.replace(/(?:^|\s)\w/g, function(match) {
-    return match.toUpperCase();
-  });
-}
-// End JSON readable
 
 // Remove loading icon
 function removeLoad(loadId) {
@@ -280,8 +169,9 @@ $('#menuTab').on('click', function() {
 });
 // End nav menu functions
 
-// Thanks to https://github.com/r-spacex/SpaceX-API for creating the following APIs
-/*
+/****
+Thanks to https://github.com/r-spacex/SpaceX-API for creating the following APIs
+
 https://api.spacexdata.com/v2/launches
 https://api.spacexdata.com/v2/launches/upcoming
 
@@ -291,6 +181,6 @@ Capsules: https://api.spacexdata.com/v2/capsules
 Launchpads: https://api.spacexdata.com/v2/launchpads
 Capsule Detail: https://api.spacexdata.com/v2/parts/caps
 Core Detail: https://api.spacexdata.com/v2/parts/cores
-*/
+****/
 
 // Project by BrennanButler.com

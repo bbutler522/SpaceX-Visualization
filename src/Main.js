@@ -13,6 +13,7 @@ import Rockets from "./Rockets";
 import Capsules from "./Capsules";
 import Launchpads from "./Launchpads";
 import About from "./About";
+import NextLaunch from "./NextLaunch"
 
 class Main extends Component {
   render() {
