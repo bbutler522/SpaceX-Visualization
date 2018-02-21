@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
 export default class Company extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0,0);
+    document.title = "SpaceX Visual 🚀 Company"
+  }
+
   render() {
     return (
       <div>

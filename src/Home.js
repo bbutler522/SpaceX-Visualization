@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
 class Home extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0,0);
+    document.title = "SpaceX Visual 🚀 A Look at Launch Data from SpaceX"
+  }
+
   render() {
     return (
       <div>

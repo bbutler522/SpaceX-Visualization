@@ -3,6 +3,12 @@ import Moment from 'moment';
 import {toTitleCase} from './helpers';
 
 export default class Previous extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0,0);
+    document.title = "SpaceX Visual 🚀 Previous Launches"
+  }
+
   render() {
     return (
       <div>
@@ -65,14 +71,11 @@ class PreviousLaunches extends Component {
             ) : false
           }
           {item.rocket.first_stage.cores[0].land_success === true ? <p className="text-info"><strong>Landing Successful</strong></p> : false}
-
-          {/* Add in Reusable parts section here */}
           {
               $.map(item.reuse, function(type,index) {
                   return type === true ? <p className="text-info"><strong>Reused {toTitleCase(index)}</strong></p> : false;
               })
           }
-
           {item.telemetry.flight_club !== null ? <p><a href={item.telemetry.flight_club} target="_blank">Telemetry</a></p> : false}
           <div className="accordion" id={"accordion" + item.flight_number} role="tablist" aria-multiselectable="true">
             {item.details !== null ?

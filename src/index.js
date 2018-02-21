@@ -3,21 +3,6 @@ import ReactDOM from 'react-dom';
 import Moment from 'moment';
 import Main from "./Main";
 
-/* Organization
-- HTML generators from JSON
-- JSON functions
-- Sorting
-- Show/Hide Next Launch Detail
-- Make JSON output readable
-- removeLoad
-- Scroll to Top
-- Smooth anchor scrolling
-*/
-
-/********************
-     Generators
-********************/
-
 ReactDOM.render(
   <Main/>,
   document.getElementById("app")
@@ -110,151 +95,8 @@ function nextLaunchGen(json) {
   return html;
 }
 
-
-
-
-// Function to generate rockets
-function rocketsGen(json) {
-  var html = "";
-  json.forEach(function(val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>"+val.name+"</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Stages: </strong>" + val.stages + "</p>"
-    if (val.boosters > 0) {
-      html += "<p><strong>Boosters: </strong>" + val.boosters + "</p>"
-    }
-    html += "<p><strong>Cost per Launch: </strong>$" + val.cost_per_launch.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</p>"
-    html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>"
-    html += "<p><strong>First Flight: </strong>" + val.first_flight + "</p>"
-    //  Add remaining info
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End Rocket Gen Function
-
-// Generate Detail Cores
-function detailCoresGen(json) {
-  var html = "";
-  json.forEach(function(val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>"+val.core_serial+"</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Status: </strong>" + val.status + "</p>"
-    html += "<p><strong>Original Launch: </strong>" + val.original_launch + "</p>"
-    html += "<p><strong>Missions: </strong></p>"
-    var missions = val.missions;
-    for (var i = 0; i < missions.length; i++) {
-      html += "<p>" + missions[i] + "</p>";
-    }
-    // Add landing attempts
-    html += "<p><strong>Details: </strong>" + val.details + "</p>"
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  })
-  return html;
-}
-// End company info gen
-
-// Function to generate capsules
-function capsulesGen(json) {
-  var html = "";
-  json.forEach(function(val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>"+val.name+"</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    if (val.crew_capacity > 0) {
-      html += "<p><strong>Crew Capacity: </strong>" + val.crew_capacity + "</p>"
-    }
-
-    //  Add remaining info
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End capsules
-
-// Generate Detail capsules
-function detailCapsulesGen(json) {
-  var html = "";
-  json.forEach(function(val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>"+val.capsule_serial +"</strong> ("+val.type+")</p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Status: </strong>" + val.status + "</p>"
-    html += "<p><strong>Original Launch: </strong>" + val.original_launch + "</p>"
-    html += "<p><strong>Missions: </strong></p>"
-    var missions = val.missions;
-    for (var i = 0; i < missions.length; i++) {
-      html += "<p>" + missions[i] + "</p>";
-    }
-    // Add landing attempts
-    html += "<p><strong>Details: </strong>" + val.details + "</p>"
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  })
-  return html;
-}
-// End capsules
-
-// Function to generate rockets
-function launchpadsGen(json) {
-  var html = "";
-  json.forEach(function(val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>"+val.full_name+"</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Location: </strong></p>"
-    html += "<p>" + val.location.name + "<br/>"
-    html += val.location.region + "<br/>"
-    html += val.location.latitude +", "+ val.location.longitude + "<br/>"
-    html += "<a href='https://www.google.com/maps/@"+val.location.latitude+","+val.location.longitude+",15z'>Google Maps</a>"
-    html += "<p><strong>Vehicles Launched: </strong></p>"
-    var vehicles = val.vehicles_launched;
-    for (var i = 0; i < vehicles.length; i++) {
-      html += "<p>" + vehicles[i] + "</p>";
-    }
-    //html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>"
-    html += "<p><strong>Details: </strong>" + val.details + "</p>"
-    //  Add remaining info
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End Rocket Gen Function
-
-
-/********************
-        JSON
-********************/
-
 // Previous Launches
 $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
-  removeLoad("previousLoad");
 
   /* Create an array of the years since the first launch
   **  to track how many launches there were each year */
@@ -315,12 +157,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
 });
 // End Previous launches
 
-// Upcoming Launches
-$.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
-
-  removeLoad("upcomingLoad");
-});
-// End Upcoming Launches
 
 // Next Launch
 $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
@@ -340,77 +176,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function(json) {
   }
 });
 // End Next Launch
-
-// Company Info
-$.getJSON("https://api.spacexdata.com/v2/info", function(json) {
-  removeLoad("companyLoad");
-});
-// End Company Info
-
-// Rocket JSON
-$.getJSON("https://api.spacexdata.com/v2/rockets", function(json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = rocketsGen(json);
-
-  // Add the html to the page
-  $("#rockets").append(html);
-  removeLoad("rocketsLoad");
-});
-// End Rocket JSON
-
-// Detail Cores JSON
-$.getJSON("https://api.spacexdata.com/v2/parts/cores", function(json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = detailCoresGen(json);
-
-  // Add the html to the page
-  $("#detailCores").append(html);
-  removeLoad("detailCoresLoad");
-});
-// End Detail Cores JSON
-
-// Capsule JSON
-$.getJSON("https://api.spacexdata.com/v2/capsules", function(json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = capsulesGen(json);
-
-  // Add the html to the page
-  $("#capsules").append(html);
-  removeLoad("capsulesLoad");
-});
-// End Capsule JSON
-
-// Detail Capsule JSON
-$.getJSON("https://api.spacexdata.com/v2/parts/caps", function(json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = detailCapsulesGen(json);
-
-  // Add the html to the page
-  $("#detailCapsules").append(html);
-  removeLoad("detailCapsulesLoad");
-});
-// End Detailed Capsule JSON
-
-// Launchpad JSON
-$.getJSON("https://api.spacexdata.com/v2/launchpads", function(json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = launchpadsGen(json);
-
-  // Add the html to the page
-  $("#launchpads").append(html);
-  removeLoad("launchpadsLoad");
-});
-// End Launchpad JSON
 
 // Countdown til launch
 // Set the date we're counting down to

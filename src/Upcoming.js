@@ -3,6 +3,12 @@ import Moment from 'moment';
 import {toTitleCase} from './helpers';
 
 export default class Upcoming extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0,0);
+    document.title = "SpaceX Visual 🚀 Upcoming Launches"
+  }
+
   render() {
     return (
       <div>

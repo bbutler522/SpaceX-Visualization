@@ -17161,21 +17161,6 @@ var _Main2 = _interopRequireDefault(_Main);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* Organization
-- HTML generators from JSON
-- JSON functions
-- Sorting
-- Show/Hide Next Launch Detail
-- Make JSON output readable
-- removeLoad
-- Scroll to Top
-- Smooth anchor scrolling
-*/
-
-/********************
-     Generators
-********************/
-
 _reactDom2.default.render(_react2.default.createElement(_Main2.default, null), document.getElementById("app"));
 
 // Generate next launch
@@ -17230,148 +17215,8 @@ function nextLaunchGen(json) {
   return html;
 }
 
-// Function to generate rockets
-function rocketsGen(json) {
-  var html = "";
-  json.forEach(function (val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>" + val.name + "</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Stages: </strong>" + val.stages + "</p>";
-    if (val.boosters > 0) {
-      html += "<p><strong>Boosters: </strong>" + val.boosters + "</p>";
-    }
-    html += "<p><strong>Cost per Launch: </strong>$" + val.cost_per_launch.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</p>";
-    html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>";
-    html += "<p><strong>First Flight: </strong>" + val.first_flight + "</p>";
-    //  Add remaining info
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End Rocket Gen Function
-
-// Generate Detail Cores
-function detailCoresGen(json) {
-  var html = "";
-  json.forEach(function (val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>" + val.core_serial + "</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Status: </strong>" + val.status + "</p>";
-    html += "<p><strong>Original Launch: </strong>" + val.original_launch + "</p>";
-    html += "<p><strong>Missions: </strong></p>";
-    var missions = val.missions;
-    for (var i = 0; i < missions.length; i++) {
-      html += "<p>" + missions[i] + "</p>";
-    }
-    // Add landing attempts
-    html += "<p><strong>Details: </strong>" + val.details + "</p>";
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End company info gen
-
-// Function to generate capsules
-function capsulesGen(json) {
-  var html = "";
-  json.forEach(function (val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>" + val.name + "</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    if (val.crew_capacity > 0) {
-      html += "<p><strong>Crew Capacity: </strong>" + val.crew_capacity + "</p>";
-    }
-
-    //  Add remaining info
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End capsules
-
-// Generate Detail capsules
-function detailCapsulesGen(json) {
-  var html = "";
-  json.forEach(function (val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>" + val.capsule_serial + "</strong> (" + val.type + ")</p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Status: </strong>" + val.status + "</p>";
-    html += "<p><strong>Original Launch: </strong>" + val.original_launch + "</p>";
-    html += "<p><strong>Missions: </strong></p>";
-    var missions = val.missions;
-    for (var i = 0; i < missions.length; i++) {
-      html += "<p>" + missions[i] + "</p>";
-    }
-    // Add landing attempts
-    html += "<p><strong>Details: </strong>" + val.details + "</p>";
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End capsules
-
-// Function to generate rockets
-function launchpadsGen(json) {
-  var html = "";
-  json.forEach(function (val) {
-    html += "<div class='launch card'>";
-    html += "<div class='card-header'>";
-    html += "<p><strong>" + val.full_name + "</strong></p>";
-    html += "</div>";
-    html += "<div class='card-block'>";
-    html += "<p><strong>Location: </strong></p>";
-    html += "<p>" + val.location.name + "<br/>";
-    html += val.location.region + "<br/>";
-    html += val.location.latitude + ", " + val.location.longitude + "<br/>";
-    html += "<a href='https://www.google.com/maps/@" + val.location.latitude + "," + val.location.longitude + ",15z'>Google Maps</a>";
-    html += "<p><strong>Vehicles Launched: </strong></p>";
-    var vehicles = val.vehicles_launched;
-    for (var i = 0; i < vehicles.length; i++) {
-      html += "<p>" + vehicles[i] + "</p>";
-    }
-    //html += "<p><strong>Success Rate: </strong>" + val.success_rate_pct + "%</p>"
-    html += "<p><strong>Details: </strong>" + val.details + "</p>";
-    //  Add remaining info
-    html += "</div></div>";
-
-    html += "</div>";
-    html += "</div>";
-  });
-  return html;
-}
-// End Rocket Gen Function
-
-
-/********************
-        JSON
-********************/
-
 // Previous Launches
 $.getJSON("https://api.spacexdata.com/v2/launches", function (json) {
-  removeLoad("previousLoad");
 
   /* Create an array of the years since the first launch
   **  to track how many launches there were each year */
@@ -17432,12 +17277,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches", function (json) {
 });
 // End Previous launches
 
-// Upcoming Launches
-$.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function (json) {
-
-  removeLoad("upcomingLoad");
-});
-// End Upcoming Launches
 
 // Next Launch
 $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function (json) {
@@ -17457,77 +17296,6 @@ $.getJSON("https://api.spacexdata.com/v2/launches/upcoming", function (json) {
   }
 });
 // End Next Launch
-
-// Company Info
-$.getJSON("https://api.spacexdata.com/v2/info", function (json) {
-  removeLoad("companyLoad");
-});
-// End Company Info
-
-// Rocket JSON
-$.getJSON("https://api.spacexdata.com/v2/rockets", function (json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = rocketsGen(json);
-
-  // Add the html to the page
-  $("#rockets").append(html);
-  removeLoad("rocketsLoad");
-});
-// End Rocket JSON
-
-// Detail Cores JSON
-$.getJSON("https://api.spacexdata.com/v2/parts/cores", function (json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = detailCoresGen(json);
-
-  // Add the html to the page
-  $("#detailCores").append(html);
-  removeLoad("detailCoresLoad");
-});
-// End Detail Cores JSON
-
-// Capsule JSON
-$.getJSON("https://api.spacexdata.com/v2/capsules", function (json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = capsulesGen(json);
-
-  // Add the html to the page
-  $("#capsules").append(html);
-  removeLoad("capsulesLoad");
-});
-// End Capsule JSON
-
-// Detail Capsule JSON
-$.getJSON("https://api.spacexdata.com/v2/parts/caps", function (json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = detailCapsulesGen(json);
-
-  // Add the html to the page
-  $("#detailCapsules").append(html);
-  removeLoad("detailCapsulesLoad");
-});
-// End Detailed Capsule JSON
-
-// Launchpad JSON
-$.getJSON("https://api.spacexdata.com/v2/launchpads", function (json) {
-  var html = "";
-
-  // Create the html for each flight
-  html = launchpadsGen(json);
-
-  // Add the html to the page
-  $("#launchpads").append(html);
-  removeLoad("launchpadsLoad");
-});
-// End Launchpad JSON
 
 // Countdown til launch
 // Set the date we're counting down to
@@ -35499,6 +35267,12 @@ var Home = function (_Component) {
   }
 
   _createClass(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 A Look at Launch Data from SpaceX";
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
@@ -40731,6 +40505,12 @@ var Previous = function (_Component) {
   }
 
   _createClass(Previous, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 Previous Launches";
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -41071,6 +40851,12 @@ var Upcoming = function (_Component) {
   }
 
   _createClass(Upcoming, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 Upcoming Launches";
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -41405,6 +41191,12 @@ var Company = function (_Component) {
   }
 
   _createClass(Company, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 Company";
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
@@ -41608,10 +41400,6 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _moment = __webpack_require__(0);
-
-var _moment2 = _interopRequireDefault(_moment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41630,6 +41418,12 @@ var Rockets = function (_Component) {
   }
 
   _createClass(Rockets, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 Rockets";
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
@@ -41640,16 +41434,14 @@ var Rockets = function (_Component) {
           null,
           "Rockets"
         ),
+        _react2.default.createElement(RocketList, null),
+        _react2.default.createElement("hr", null),
         _react2.default.createElement(
-          "p",
+          "h2",
           null,
-          "Cras facilisis urna ornare ex volutpat, et convallis erat elementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec massa. Maecenas hendrerit laoreet augue nec molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+          "Detailed Rocket Info"
         ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Duis a turpis sed lacus dapibus elementum sed eu lectus."
-        )
+        _react2.default.createElement(RocketDetail, null)
       );
     }
   }]);
@@ -41658,6 +41450,312 @@ var Rockets = function (_Component) {
 }(_react.Component);
 
 exports.default = Rockets;
+
+var RocketList = function (_Component2) {
+  _inherits(RocketList, _Component2);
+
+  function RocketList(props) {
+    _classCallCheck(this, RocketList);
+
+    var _this2 = _possibleConstructorReturn(this, (RocketList.__proto__ || Object.getPrototypeOf(RocketList)).call(this, props));
+
+    _this2.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this2.handleClick = _this2.handleClick.bind(_this2);
+    return _this2;
+  }
+
+  _createClass(RocketList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.UpcomingLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: "UpcomingLaunches",
+    value: function UpcomingLaunches() {
+      var _this3 = this;
+
+      fetch("https://api.spacexdata.com/v2/rockets").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this3.setState({ launch: json.reverse() });
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          "div",
+          { className: "launch card" },
+          _react2.default.createElement(
+            "div",
+            { className: "card-header" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                item.name
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "card-block" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Stages: "
+              ),
+              " ",
+              item.stages
+            ),
+            item.bootsters > 0 ? _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Boosters: "
+              ),
+              " ",
+              item.boosters
+            ) : null,
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Boosters: "
+              ),
+              " ",
+              item.boosters
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Cost per Launch: "
+              ),
+              " ",
+              item.cost_per_launch
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Success Rate: "
+              ),
+              " ",
+              item.success_rate_pct,
+              "%"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "First Flight: "
+              ),
+              " ",
+              item.first_flight
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        "div",
+        { id: "layout-content", className: "layout-content-wrapper" },
+        _react2.default.createElement(
+          "button",
+          { className: "btn btn-info", onClick: this.handleClick },
+          "Show ",
+          this.state.reversed ? 'lastest' : 'earliest',
+          " first"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "panel-list row list" },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return RocketList;
+}(_react.Component);
+
+var RocketDetail = function (_Component3) {
+  _inherits(RocketDetail, _Component3);
+
+  function RocketDetail(props) {
+    _classCallCheck(this, RocketDetail);
+
+    var _this4 = _possibleConstructorReturn(this, (RocketDetail.__proto__ || Object.getPrototypeOf(RocketDetail)).call(this, props));
+
+    _this4.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this4.handleClick = _this4.handleClick.bind(_this4);
+    return _this4;
+  }
+
+  _createClass(RocketDetail, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.UpcomingLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: "UpcomingLaunches",
+    value: function UpcomingLaunches() {
+      var _this5 = this;
+
+      fetch("https://api.spacexdata.com/v2/parts/cores").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this5.setState({ launch: json.reverse() });
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          "div",
+          { className: "launch card" },
+          _react2.default.createElement(
+            "div",
+            { className: "card-header" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                item.core_serial
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "card-block" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Status: "
+              ),
+              " ",
+              item.status
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Original Launch: "
+              ),
+              " ",
+              item.original_launch
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Missions: "
+              )
+            ),
+            item.missions.map(function (missions, index) {
+              return missions !== null ? _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  missions
+                )
+              ) : false;
+            }),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Details: "
+              ),
+              " ",
+              item.details
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        "div",
+        { id: "layout-content", className: "layout-content-wrapper" },
+        _react2.default.createElement(
+          "button",
+          { className: "btn btn-info", onClick: this.handleClick },
+          "Show ",
+          this.state.reversed ? 'lastest' : 'earliest',
+          " first"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "panel-list row list" },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return RocketDetail;
+}(_react.Component);
 
 /***/ }),
 /* 205 */
@@ -41704,16 +41802,14 @@ var Capsules = function (_Component) {
           null,
           "Capsules"
         ),
+        _react2.default.createElement(CapsuleList, null),
+        _react2.default.createElement("hr", null),
         _react2.default.createElement(
-          "p",
+          "h2",
           null,
-          "Cras facilisis urna ornare ex volutpat, et convallis erat elementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec massa. Maecenas hendrerit laoreet augue nec molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+          "Detailed Capsules"
         ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Duis a turpis sed lacus dapibus elementum sed eu lectus."
-        )
+        _react2.default.createElement(CapsuleDetail, null)
       );
     }
   }]);
@@ -41722,6 +41818,259 @@ var Capsules = function (_Component) {
 }(_react.Component);
 
 exports.default = Capsules;
+
+var CapsuleList = function (_Component2) {
+  _inherits(CapsuleList, _Component2);
+
+  function CapsuleList(props) {
+    _classCallCheck(this, CapsuleList);
+
+    var _this2 = _possibleConstructorReturn(this, (CapsuleList.__proto__ || Object.getPrototypeOf(CapsuleList)).call(this, props));
+
+    _this2.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this2.handleClick = _this2.handleClick.bind(_this2);
+    return _this2;
+  }
+
+  _createClass(CapsuleList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.UpcomingLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: "UpcomingLaunches",
+    value: function UpcomingLaunches() {
+      var _this3 = this;
+
+      fetch("https://api.spacexdata.com/v2/capsules").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this3.setState({ launch: json.reverse() });
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          "div",
+          { className: "launch card" },
+          _react2.default.createElement(
+            "div",
+            { className: "card-header" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                item.name
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "card-block" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Crew Capacity: "
+              ),
+              " ",
+              item.crew_capacity
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        "div",
+        { id: "layout-content", className: "layout-content-wrapper" },
+        _react2.default.createElement(
+          "button",
+          { className: "btn btn-info", onClick: this.handleClick },
+          "Show ",
+          this.state.reversed ? 'lastest' : 'earliest',
+          " first"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "panel-list row list" },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return CapsuleList;
+}(_react.Component);
+
+var CapsuleDetail = function (_Component3) {
+  _inherits(CapsuleDetail, _Component3);
+
+  function CapsuleDetail(props) {
+    _classCallCheck(this, CapsuleDetail);
+
+    var _this4 = _possibleConstructorReturn(this, (CapsuleDetail.__proto__ || Object.getPrototypeOf(CapsuleDetail)).call(this, props));
+
+    _this4.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this4.handleClick = _this4.handleClick.bind(_this4);
+    return _this4;
+  }
+
+  _createClass(CapsuleDetail, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.UpcomingLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: "UpcomingLaunches",
+    value: function UpcomingLaunches() {
+      var _this5 = this;
+
+      fetch("https://api.spacexdata.com/v2/parts/caps").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this5.setState({ launch: json.reverse() });
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          "div",
+          { className: "launch card" },
+          _react2.default.createElement(
+            "div",
+            { className: "card-header" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                item.capsule_serial
+              ),
+              " (",
+              item.type,
+              ")"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "card-block" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Status: "
+              ),
+              " ",
+              item.status
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Original Launch: "
+              ),
+              " ",
+              item.original_launch
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Missions: "
+              )
+            ),
+            item.missions.map(function (missions, index) {
+              return missions !== null ? _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  missions
+                )
+              ) : false;
+            }),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Details: "
+              ),
+              " ",
+              item.details
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        "div",
+        { id: "layout-content", className: "layout-content-wrapper" },
+        _react2.default.createElement(
+          "button",
+          { className: "btn btn-info", onClick: this.handleClick },
+          "Show ",
+          this.state.reversed ? 'lastest' : 'earliest',
+          " first"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "panel-list row list" },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return CapsuleDetail;
+}(_react.Component);
 
 /***/ }),
 /* 206 */
@@ -41758,6 +42107,12 @@ var Launchpads = function (_Component) {
   }
 
   _createClass(Launchpads, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 Launchpads";
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
@@ -41768,16 +42123,7 @@ var Launchpads = function (_Component) {
           null,
           "Launchpads"
         ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Cras facilisis urna ornare ex volutpat, et convallis erat elementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec massa. Maecenas hendrerit laoreet augue nec molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-        ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Duis a turpis sed lacus dapibus elementum sed eu lectus."
-        )
+        _react2.default.createElement(LaunchpadList, null)
       );
     }
   }]);
@@ -41786,6 +42132,154 @@ var Launchpads = function (_Component) {
 }(_react.Component);
 
 exports.default = Launchpads;
+
+var LaunchpadList = function (_Component2) {
+  _inherits(LaunchpadList, _Component2);
+
+  function LaunchpadList(props) {
+    _classCallCheck(this, LaunchpadList);
+
+    var _this2 = _possibleConstructorReturn(this, (LaunchpadList.__proto__ || Object.getPrototypeOf(LaunchpadList)).call(this, props));
+
+    _this2.state = {
+      launch: [],
+      reversed: true
+    };
+
+    _this2.handleClick = _this2.handleClick.bind(_this2);
+    return _this2;
+  }
+
+  _createClass(LaunchpadList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.UpcomingLaunches();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: "UpcomingLaunches",
+    value: function UpcomingLaunches() {
+      var _this3 = this;
+
+      fetch("https://api.spacexdata.com/v2/launchpads").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this3.setState({ launch: json.reverse() });
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      // Because we reverse the launch array on render, pass the current launch array
+      var reverseLaunches = this.state.launch;
+      this.setState({ launch: reverseLaunches, reversed: !this.state.reversed });
+      console.log(this.state);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var launches = this.state.launch.reverse().map(function (item, i) {
+        return _react2.default.createElement(
+          "div",
+          { className: "launch card" },
+          _react2.default.createElement(
+            "div",
+            { className: "card-header" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                item.full_name
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "card-block" },
+            _react2.default.createElement(
+              "p",
+              null,
+              item.location.name
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              item.location.region
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              item.location.latitude,
+              ", ",
+              item.location.longitude
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "a",
+                { href: 'https://www.google.com/maps/@' + item.location.latitude + ',' + item.location.longitude + ',15z' },
+                "Google Maps"
+              )
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Vehicles Launched:"
+              )
+            ),
+            item.vehicles_launched.map(function (vehicles, index) {
+              return vehicles !== null ? _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  vehicles
+                )
+              ) : false;
+            }),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Details: "
+              ),
+              " ",
+              item.details
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        "div",
+        { id: "layout-content", className: "layout-content-wrapper" },
+        _react2.default.createElement(
+          "button",
+          { className: "btn btn-info", onClick: this.handleClick },
+          "Reverse"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "panel-list row list" },
+          launches
+        )
+      );
+    }
+  }]);
+
+  return LaunchpadList;
+}(_react.Component);
 
 /***/ }),
 /* 207 */
@@ -41835,12 +42329,52 @@ var About = function (_Component) {
         _react2.default.createElement(
           "p",
           null,
-          "Cras facilisis urna ornare ex volutpat, et convallis erat elementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec massa. Maecenas hendrerit laoreet augue nec molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+          "A visualization of SpaceX launches."
         ),
         _react2.default.createElement(
           "p",
           null,
-          "Duis a turpis sed lacus dapibus elementum sed eu lectus."
+          "Created using React, jQuery, Bootstrap, GitHub, SCSS, Babel, Webpack, and more."
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "API's used:",
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "a",
+            { href: "https://api.spacexdata.com/v2/launches", target: "_blank" },
+            "https://api.spacexdata.com/v2/launches"
+          ),
+          _react2.default.createElement("br", null),
+          " By: ",
+          _react2.default.createElement(
+            "a",
+            { href: "https://github.com/r-spacex/SpaceX-API", target: "_blank" },
+            "https://github.com/r-spacex/SpaceX-API"
+          )
+        ),
+        _react2.default.createElement(
+          "p",
+          { "class": "alert alert-info" },
+          "Work in progress, some content is still being built and a lot of improvements to follow. Track updates on ",
+          _react2.default.createElement(
+            "a",
+            { href: "https://github.com/bbutler522/SpaceX-Visualization" },
+            "GitHub"
+          ),
+          "."
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "GitHub:",
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "a",
+            { href: "https://github.com/bbutler522/SpaceX-Visualization", target: "_blank" },
+            "https://github.com/bbutler522/SpaceX-Visualization"
+          )
         )
       );
     }
