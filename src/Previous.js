@@ -27,6 +27,7 @@ class PreviousLaunches extends Component {
 
   componentDidMount() {
     this.PreviousLaunches();
+    window.scrollTo(0,0);
   }
 
   // Get the JSON

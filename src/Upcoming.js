@@ -27,6 +27,7 @@ class UpcomingLaunches extends Component {
 
   componentDidMount() {
     this.UpcomingLaunches();
+    window.scrollTo(0,0);
   }
 
   // Get the JSON
