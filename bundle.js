@@ -41415,16 +41415,7 @@ var Company = function (_Component) {
           null,
           "Company"
         ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Cras facilisis urna ornare ex volutpat, et convallis erat elementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec massa. Maecenas hendrerit laoreet augue nec molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-        ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Duis a turpis sed lacus dapibus elementum sed eu lectus."
-        )
+        _react2.default.createElement(CompanyInfo, null)
       );
     }
   }]);
@@ -41433,6 +41424,172 @@ var Company = function (_Component) {
 }(_react.Component);
 
 exports.default = Company;
+
+var CompanyInfo = function (_Component2) {
+  _inherits(CompanyInfo, _Component2);
+
+  function CompanyInfo(props) {
+    _classCallCheck(this, CompanyInfo);
+
+    var _this2 = _possibleConstructorReturn(this, (CompanyInfo.__proto__ || Object.getPrototypeOf(CompanyInfo)).call(this, props));
+
+    _this2.state = {
+      company: []
+    };
+    return _this2;
+  }
+
+  _createClass(CompanyInfo, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.CompanyInfo();
+    }
+
+    // Get the JSON
+
+  }, {
+    key: "CompanyInfo",
+    value: function CompanyInfo() {
+      var _this3 = this;
+
+      fetch("https://api.spacexdata.com/v2/info").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        _this3.setState({ company: json });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var company = _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "Company: "
+          ),
+          " ",
+          this.state.company.name
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "Founder: "
+          ),
+          " ",
+          this.state.company.founder
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "Founded: "
+          ),
+          " ",
+          this.state.company.founded
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "Employees: "
+          ),
+          " ",
+          this.state.company.employees
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "CEO: "
+          ),
+          " ",
+          this.state.company.ceo
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "CTO: "
+          ),
+          " ",
+          this.state.company.cto
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "COO: "
+          ),
+          " ",
+          this.state.company.coo
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "CTO Propulsion: "
+          ),
+          " ",
+          this.state.company.cto_propulsion
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "Valuation: "
+          ),
+          " ",
+          this.state.company.valuation
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          _react2.default.createElement(
+            "strong",
+            null,
+            "Summary: "
+          ),
+          " ",
+          this.state.company.summary
+        )
+      );
+
+      return _react2.default.createElement(
+        "div",
+        { id: "layout-content", className: "layout-content-wrapper row" },
+        _react2.default.createElement(
+          "div",
+          { className: "panel-list col-12 list" },
+          company
+        )
+      );
+    }
+  }]);
+
+  return CompanyInfo;
+}(_react.Component);
 
 /***/ }),
 /* 204 */
@@ -41450,6 +41607,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
