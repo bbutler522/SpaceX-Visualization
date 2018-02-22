@@ -41041,7 +41041,7 @@ var PreviousLaunches = function (_Component2) {
           'button',
           { className: 'btn btn-info', onClick: this.handleClick },
           'Show ',
-          this.state.reversed ? 'lastest' : 'earliest',
+          this.state.reversed ? 'latest' : 'earliest',
           ' first'
         ),
         _react2.default.createElement(
@@ -41387,7 +41387,7 @@ var UpcomingLaunches = function (_Component2) {
           'button',
           { className: 'btn btn-info', onClick: this.handleClick },
           'Show ',
-          this.state.reversed ? 'lastest' : 'earliest',
+          this.state.reversed ? 'latest' : 'earliest',
           ' first'
         ),
         _react2.default.createElement(
@@ -41842,7 +41842,7 @@ var RocketList = function (_Component2) {
           "button",
           { className: "btn btn-info", onClick: this.handleClick },
           "Show ",
-          this.state.reversed ? 'lastest' : 'earliest',
+          this.state.reversed ? 'latest' : 'earliest',
           " first"
         ),
         _react2.default.createElement(
@@ -41988,7 +41988,7 @@ var RocketDetail = function (_Component3) {
           "button",
           { className: "btn btn-info", onClick: this.handleClick },
           "Show ",
-          this.state.reversed ? 'lastest' : 'earliest',
+          this.state.reversed ? 'latest' : 'earliest',
           " first"
         ),
         _react2.default.createElement(
@@ -42038,6 +42038,12 @@ var Capsules = function (_Component) {
   }
 
   _createClass(Capsules, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 Capsules";
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
@@ -42154,7 +42160,7 @@ var CapsuleList = function (_Component2) {
           "button",
           { className: "btn btn-info", onClick: this.handleClick },
           "Show ",
-          this.state.reversed ? 'lastest' : 'earliest',
+          this.state.reversed ? 'latest' : 'earliest',
           " first"
         ),
         _react2.default.createElement(
@@ -42303,7 +42309,7 @@ var CapsuleDetail = function (_Component3) {
           "button",
           { className: "btn btn-info", onClick: this.handleClick },
           "Show ",
-          this.state.reversed ? 'lastest' : 'earliest',
+          this.state.reversed ? 'latest' : 'earliest',
           " first"
         ),
         _react2.default.createElement(
@@ -42562,6 +42568,12 @@ var About = function (_Component) {
   }
 
   _createClass(About, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+      document.title = "SpaceX Visual 🚀 About";
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(

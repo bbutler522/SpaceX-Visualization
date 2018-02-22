@@ -132,7 +132,7 @@ class PreviousLaunches extends Component {
 
     return (
       <div id="layout-content" className="layout-content-wrapper">
-        <button className='btn btn-info' onClick={this.handleClick}>Show {this.state.reversed ? 'lastest' : 'earliest'} first</button>
+        <button className='btn btn-info' onClick={this.handleClick}>Show {this.state.reversed ? 'latest' : 'earliest'} first</button>
         <div className="panel-list row list">{ launches }</div>
       </div>
     );
