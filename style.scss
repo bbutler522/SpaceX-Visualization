@@ -2,6 +2,10 @@ body, h1, h2, h3, h4, h5, h6, p {
   font-family: "Mada", sans-serif !important;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 #header {
   position: fixed;
   z-index: 5;
