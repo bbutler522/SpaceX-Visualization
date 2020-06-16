@@ -1,9 +1,6 @@
 # SpaceX-Visualization
 A visualization of SpaceX launches
 
-## Live preview
-http://spacexvisual.com/
-
 ## Technologies
 Build using primarily React and jQuery to work with JSON data, presenting it in an easy to examine format. 
 An initial chart is generated with Google Charts, though more in depth analyses will be added later (Either in GCharts or D3.js)
