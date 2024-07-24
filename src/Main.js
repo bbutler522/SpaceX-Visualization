@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import {
-  Route,
   NavLink,
-  HashRouter
+  HashRouter,
+  Routes,
+  Route
 } from "react-router-dom";
 import Home from "./Home";
 import Charts from "./Charts";
@@ -48,14 +49,16 @@ class Main extends Component {
               <div className="col-sm-12">
                 <div className="content">
                   <br/><br/><br/><br/>
-                  <Route exact path="/" component={Home}/>
-                  <Route path="/previous" component={Previous}/>
-                  <Route path="/upcoming" component={Upcoming}/>
-                  <Route path="/company" component={Company}/>
-                  <Route path="/rockets" component={Rockets}/>
-                  <Route path="/capsules" component={Capsules}/>
-                  <Route path="/launchpads" component={Launchpads}/>
-                  <Route path="/about" component={About}/>
+                  <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route path="/previous" element={<Previous />} />
+                    <Route path="/upcoming" element={<Upcoming />} />
+                    <Route path="/company" element={<Company />} />
+                    <Route path="/rockets" element={<Rockets />} />
+                    <Route path="/capsules" element={<Capsules />} />
+                    <Route path="/launchpads" element={<Launchpads />} />
+                    <Route path="/about" element={<About />} />
+                  </Routes>
                 </div>
               </div>
             </div>
