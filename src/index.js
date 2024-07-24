@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Moment from 'moment';
+import ReactDOM from 'react-dom/client';
 import Main from "./Main";
 
-ReactDOM.render(
-  <Main/>,
-  document.getElementById("app")
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(
+  <React.StrictMode>
+    <Main />
+  </React.StrictMode>
 );
-
 
 // Chart JSON
 $.getJSON("https://api.spacexdata.com/v2/launches", function(json) {
